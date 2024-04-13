@@ -8,7 +8,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 
 <main class="container mt-5">
     <div class="row">
-        <div class="col-9">
+        <div class="col-12 col-md-9">
         <?php include __DIR__ . "/pages/" . $page . '.php'?>
         </div>
 

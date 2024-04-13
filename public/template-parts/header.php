@@ -9,6 +9,7 @@
     <link href="https://bootswatch.com/5/lux/bootstrap.css" rel="stylesheet">
     <link href="https://bootswatch.com/_vendor/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= ROOT_URL ?>assets/css/style.css">
 </head>
 
@@ -27,6 +28,8 @@
                     <li><a href="<?= ROOT_URL ?>public/?page=contacts" class="nav-link px-2 text-white">Contatti</a></li>
                 </ul>
 
+
+
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                 </form>
@@ -34,6 +37,12 @@
                 <div class="text-end">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
                     <button type="button" class="btn btn-warning">Sign-up</button>
+                    <a class="btn btn-outline-warning ms-5 py-2 position-relative" href="<?= ROOT_URL ?>shop/?page=cart">
+                        <i class="fa-solid fa-cart-shopping fs-3"></i>
+                        <span class="fs-6 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                            99+
+                        </span>
+                    </a>
                 </div>
             </div>
         </nav>
