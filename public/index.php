@@ -2,7 +2,7 @@
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 ?>
 
-<?php include "../inc/init.php" ?>
+<?php include "../inc/config.php" ?>
 
 <?php include __DIR__ . "/template-parts/header.php" ?>
 
