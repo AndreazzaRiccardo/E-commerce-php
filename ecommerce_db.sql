@@ -33,3 +33,17 @@ INSERT INTO products (name, price, description, category_id, image_path) VALUES
 ('Cuscino', RAND()*20, 'Cuscino decorativo per divano, realizzato con tessuti di alta qualità e riempito con materiale soffice e soffice. Offre un sostegno ottimale e un aspetto accattivante, ideale per abbellire qualsiasi ambiente e rendere ogni momento di relax ancora più piacevole.', 3, "public/imgs/cuscino.jpg"),
 ('Sapone', RAND()*5, 'Sapone liquido idratante, arricchito con ingredienti nutrienti e oli essenziali. Deterge delicatamente mentre idrata e lenisce la pelle, adatto a un uso quotidiano per una pelle morbida e radiosa.', 3, "public/imgs/sapone.jpg");
 
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id VARCHAR(50)
+);
+
+CREATE TABLE cart_product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (cart_id) REFERENCES cart(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+

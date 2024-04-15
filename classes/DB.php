@@ -1,6 +1,7 @@
 <?php
 
-class DB {
+class DB
+{
 
     private $conn;
     public $pdo;
@@ -9,35 +10,35 @@ class DB {
     {
         global $conn;
         $this->conn = $conn;
-        if(mysqli_connect_errno()) {
+        if (mysqli_connect_errno()) {
             echo "Connessione al server fallita" . mysqli_connect_errno();
             die;
         }
         $this->pdo = new PDO('mysql:dbname=' . DB_NAME . ';host=' . DB_HOST, DB_USER, DB_PASSW);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function query($sql) {
-        try
-        {
-            $q = $this->pdo->query($sql);
-            if(!$q){
-                throw new Exception("Errore nell'esecuzione della query");
-                return;
-            }
-            $data = $q->fetchAll();
-            return $data;
+    public function query($sql)
+    {
+        $q = $this->pdo->query($sql);
+        if (!$q) {
+            return;
         }
-        catch(Exception $e)
-        {
-            throw $e;
-        }
+        $data = $q->fetchAll();
+        return $data;
     }
 
-    public function select_all($tableName, $columns = array()) {
+    public function execute($sql){
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function select_all($tableName, $columns = array())
+    {
         $query = 'SELECT ';
 
         $strCol = '';
-        foreach($columns as $colName) {
+        foreach ($columns as $colName) {
             $strCol .= ' ' . mysqli_real_escape_string($this->conn, $colName) . ',';
         }
         $strCol = substr($strCol, 0, -1);
@@ -52,10 +53,11 @@ class DB {
         return $resultArray;
     }
 
-    public function select_one($tableName, $columns = array(), $id) {
+    public function select_one($tableName, $columns = array(), $id)
+    {
 
         $strCol = '';
-        foreach($columns as $colName) {
+        foreach ($columns as $colName) {
             $colName = mysqli_real_escape_string($this->conn, $colName);
             $strCol .= ' ' . $colName . ',';
         }
@@ -71,11 +73,12 @@ class DB {
         return $resultArray;
     }
 
-    public function delete_one($tableName, $id) {
+    public function delete_one($tableName, $id)
+    {
         $id = mysqli_real_escape_string($this->conn, $id);
         $query = "DELETE FROM $tableName WHERE id = $id";
 
-        if(mysqli_query($this->conn, $query)) {
+        if (mysqli_query($this->conn, $query)) {
             $rowsAffected = mysqli_affected_rows($this->conn);
 
             return $rowsAffected;
@@ -84,10 +87,11 @@ class DB {
         }
     }
 
-    public function update_one($tableName, $columns = array(), $id) {
+    public function update_one($tableName, $columns = array(), $id)
+    {
         $id = mysqli_real_escape_string($this->conn, $id);
         $strCol = '';
-        foreach($columns as $colName => $colValue) {
+        foreach ($columns as $colName => $colValue) {
             $colName = mysqli_real_escape_string($this->conn, $colName);
             $strCol .= ' ' . $colName . " = '$colValue' ,";
         }
@@ -95,9 +99,9 @@ class DB {
         $strCol = substr($strCol, 0, -1);
 
         $query = "UPDATE $tableName SET $strCol WHERE id = $id";
-        $query = str_replace("'NULL'", "'NULL'", $query);
+        $query = str_replace("'NULL'", "NULL", $query);
 
-        if(mysqli_query($this->conn, $query)) {
+        if (mysqli_query($this->conn, $query)) {
             $rowsAffected = mysqli_affected_rows($this->conn);
 
             return $rowsAffected;
@@ -106,10 +110,11 @@ class DB {
         }
     }
 
-    public function insert_one($tableName, $columns = array()) {
-        
+    public function insert_one($tableName, $columns = array())
+    {
+
         $strCol = '';
-        foreach($columns as $colName => $colValue) {
+        foreach ($columns as $colName => $colValue) {
             $colName = mysqli_real_escape_string($this->conn, $colName);
             $strCol .= ' ' . $colName . ',';
         }
@@ -117,7 +122,7 @@ class DB {
         $strCol = substr($strCol, 0, -1);
 
         $strColValues = '';
-        foreach($columns as $colName => $colValue) {
+        foreach ($columns as $colName => $colValue) {
             $colValue = mysqli_real_escape_string($this->conn, $colValue);
             $strColValues .= " '" . $colValue . "' ,";
         }
@@ -125,7 +130,7 @@ class DB {
 
         $query = "INSERT INTO $tableName ($strCol) VALUES ($strColValues)";
 
-        if(mysqli_query($this->conn, $query)) {
+        if (mysqli_query($this->conn, $query)) {
             $lastId = mysqli_insert_id($this->conn);
 
             return $lastId;
@@ -135,8 +140,10 @@ class DB {
     }
 }
 
-class DBManager {
-    
+
+class DBManager
+{
+
     protected $db;
     protected $columns;
     protected $tableName;
@@ -146,32 +153,37 @@ class DBManager {
         $this->db = new DB();
     }
 
-    public function get($id) {
+    public function get($id)
+    {
         $resultArr = $this->db->select_one($this->tableName, $this->columns, (int)$id);
         return (object) $resultArr;
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $results = $this->db->select_all($this->tableName, $this->columns);
         $objects = array();
-        foreach($results as $result) {
+        foreach ($results as $result) {
             array_push($objects, (object)$result);
         }
         return $objects;
     }
 
-    public function create($obj) {
-        $newId = $this->db->insert_one($this->tableName, (array) $obj);
+    public function create($obj)
+    {
+        $newId = $this->db->insert_one($this->tableName, (array)$obj);
         return $newId;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $rowsDeleted = $this->db->delete_one($this->tableName, (int)$id);
         return (int) $rowsDeleted;
     }
 
-    public function update($obj, $id) {
-        $rowsDeleted = $this->db->update_one($this->tableName, (array) $obj, (int)$id);
+    public function update($obj, $id)
+    {
+        $rowsDeleted = $this->db->update_one($this->tableName, (array)$obj, (int)$id);
         return (int) $rowsDeleted;
     }
 }

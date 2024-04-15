@@ -11,3 +11,6 @@ define('DB_NAME', "ecommerce_db");
 require_once __DIR__ . '/../inc/globals.php';
 require_once __DIR__ . '/../classes/DB.php';
 require_once __DIR__ . '/../classes/Product.php';
+require_once __DIR__ . '/../classes/Cart.php';
+
+session_start();
