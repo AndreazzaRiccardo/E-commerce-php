@@ -1,3 +1,9 @@
+<?php
+    $cm = new CartManager();
+    $cartID = $cm->getCartID();
+    $cart_total = $cm->getCartTotal($cartID);
+?>
+
 <footer class="bg-primary pb-1">
     <hr>
     <p class="container text-light">By Riccardo Andreazza, Copyright &copy; 2024</p>
@@ -7,6 +13,11 @@
 <script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
 
 <script src="<?= ROOT_URL ?>assets/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.total-items').innerHTML = '<?php echo $cart_total['num_products']; ?>';
+});
+</script>
 </body>
 
 </html>

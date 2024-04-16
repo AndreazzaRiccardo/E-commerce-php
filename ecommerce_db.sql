@@ -47,3 +47,24 @@ CREATE TABLE cart_product (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+CREATE TABLE user_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+INSERT INTO user_type (id, name) VALUES
+(1, 'Administrator'),
+(2, 'Regular');
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    password VARCHAR(255),
+    user_type_id INT,
+    FOREIGN KEY (user_type_id) REFERENCES user_type(id)
+);
+
+INSERT INTO users (email, password, user_type_id) VALUES
+('admin@gmail.com', md5('ciao'), 1),
+('mario.rossi@gmail.com', md5('ciao'), 2);
+

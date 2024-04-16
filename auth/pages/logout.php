@@ -1,1 +1,5 @@
-<h2>Logout</h2>
+<?php 
+unset($_SESSION['user']);
+header('Location: index.php');
+exit;
+?>

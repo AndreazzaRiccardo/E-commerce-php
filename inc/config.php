@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define('ROOT_URL', "http://" . $_SERVER['HTTP_HOST'] . "/E-commerce-php/");
 
 // Env DB
@@ -12,5 +14,6 @@ require_once __DIR__ . '/../inc/globals.php';
 require_once __DIR__ . '/../classes/DB.php';
 require_once __DIR__ . '/../classes/Product.php';
 require_once __DIR__ . '/../classes/Cart.php';
+require_once __DIR__ . '/../classes/User.php';
 
-session_start();
+

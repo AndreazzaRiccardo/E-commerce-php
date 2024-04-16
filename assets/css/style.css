@@ -1,0 +1,15 @@
+.nav-link {
+    border-bottom: 2px solid transparent !important;
+    margin-bottom: -3px;
+    &:hover {
+        border-bottom: 2px solid white !important;
+    }
+}
+
+.dropdown-item:hover {
+    background-color: rgb(76, 75, 75) !important;
+}
+
+.dropdown-toggle {
+    width: 250px !important;
+}

@@ -1,32 +1,24 @@
 <?php
-$cart_total = [
-    'num_products' => 3,
-    'total' => 35.00
-];
 
-$cart_items = [
-    // [
-    // 'name' => 'Prodotto 1',
-    // 'description' => 'Questo è il prodotto 1',
-    // 'single_price' => 29,
-    // 'quantity' => 2,
-    // 'total_price' => 58
-    // ],
-    // [
-    // 'name' => 'Prodotto 2',
-    // 'description' => 'Questo è il prodotto 2',
-    // 'single_price' => 10,
-    // 'quantity' => 3,
-    // 'total_price' => 30
-    // ],
-    // [
-    // 'name' => 'Prodotto 3',
-    // 'description' => 'Questo è il prodotto 3',
-    // 'single_price' => 12,
-    // 'quantity' => 5,
-    // 'total_price' => 60
-    // ],
-]
+$cm = new CartManager();
+$cartID = $cm->getCartID();
+
+
+if(isset($_POST['minus'])){
+    $productID = htmlspecialchars(trim($_POST['id']));
+    $cm->removeFromCart($productID, $cartID);
+}
+
+if(isset($_POST['plus'])){
+
+    $productID = htmlspecialchars(trim($_POST['id']));
+    $cm->addToCart($productID, $cartID);
+}
+
+$cart_total = $cm->getCartTotal($cartID);
+$cart_items = $cm->getCartItems($cartID);
+
+
 ?>
 
 <div class="col-10 order-md-last">
@@ -41,21 +33,23 @@ $cart_items = [
             <?php foreach ($cart_items as $item) { ?>
                 <li class="list-group-item d-flex justify-content-between lh-sm p-4">
                     <div class="row w-100">
-                        <div class="col-6 col-lg-4">
+                        <div class="col-6 col-lg-4 d-flex align-items-center">
                             <h6 class="my-0"><?= $item['name'] ?></h6>
-                            <small class="text-muted text-truncate"><?= $item['description'] ?></small>
                         </div>
-                        <div class="col-6 col-lg-2">
+                        <div class="col-6 col-lg-2 d-flex align-items-center">
                             <span class="text-muted"><?= $item['single_price'] ?></span>
                         </div>
                         <div class="col-6 col-lg-4">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn px-2 py-0 btn-sm btn-primary fs-4">-</button>
-                                <span class="text-muted border border-dark px-3 d-flex align-items-center"><?= $item['quantity'] ?></span>
-                                <button type="button" class="btn px-2 py-0 btn-sm btn-primary fs-4">+</button>
-                            </div>
+                            <form method="POST">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button name="minus" type="submit" class="btn px-2 py-0 btn-sm btn-primary fs-4">-</button>
+                                    <span class="text-muted border border-dark px-3 d-flex align-items-center"><?= $item['quantity'] ?></span>
+                                    <button name="plus" type="submit" class="btn px-2 py-0 btn-sm btn-primary fs-4">+</button>
+                                    <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                                </div>
+                            </form>
                         </div>
-                        <div class="col-6 col-lg-2">
+                        <div class="col-6 col-lg-2 d-flex align-items-center">
                             <strong><?= $item['total_price'] ?></strong>
                         </div>
                     </div>
