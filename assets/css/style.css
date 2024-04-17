@@ -13,3 +13,11 @@
 .dropdown-toggle {
     width: 250px !important;
 }
+
+
+@media screen and (max-width: 766px) {
+    #sidebarMenu {
+        height: 100% !important;
+    }
+}
+

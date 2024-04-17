@@ -16,19 +16,21 @@
 <body>
     <header class="p-2 bg-primary text-white">
         <nav class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="<?= ROOT_URL ?>public/?page=homepage" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
+                <a href="<?php if(!$_SESSION['user']->is_admin) { echo ROOT_URL . 'public/?page=homepage'; } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     PHP E-commerce
                 </a>
+                <?php if (!$_SESSION['user']->is_admin) { ?>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="<?= ROOT_URL ?>public/?page=about" class="nav-link px-2 text-white">Chi Siamo</a></li>
                     <li><a href="<?= ROOT_URL ?>public/?page=services" class="nav-link px-2 text-white">Servizi</a></li>
                     <li><a href="<?= ROOT_URL ?>shop/?page=products-list" class="nav-link px-2 text-white">Prodotti</a></li>
                     <li><a href="<?= ROOT_URL ?>public/?page=contacts" class="nav-link px-2 text-white">Contatti</a></li>
                 </ul>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                <form method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input id="searchbar" name="search" type="search" class="form-control form-control-dark" placeholder="Cerca per nome" aria-label="Search">
                 </form>
+                <?php } ?>
                 <div class="text-end">
 
                     <?php if (!isset($_SESSION['user'])) { ?>
@@ -40,8 +42,8 @@
                             <li>
                                 <hr class="dropdown-divider border-light">
                             </li>
-                            <li><a class="dropdown-item text-light" href="">Sign-up</a></li>
-                        </ul>
+                            <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=sign_up">Sign-up</a></li>
+                        </ul> 
                     <?php } ?>
 
                     <?php if (isset($_SESSION['user']) && !$_SESSION['user']->is_admin) { ?>
@@ -59,16 +61,20 @@
                             Amministrazione
                         </a>
                         <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>admin/?page=dashboard">Dashboard</a></li>
+                            <li>
+                            <hr class="dropdown-divider border-light">
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=logout">Logout</a></li>
                             <li>
                         </ul>
                     <?php } ?>
 
-
+                    <?php if (!$_SESSION['user']->is_admin) { ?>
                     <a class="btn btn-outline-warning ms-2 py-2 position-relative" href="<?= ROOT_URL ?>shop/?page=cart">
                         <i class="fa-solid fa-cart-shopping fs-3"></i>
                         <span class="total-items fs-6 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"></span>
                     </a>
+                    <?php } ?>
                 </div>
             </div>
         </nav>

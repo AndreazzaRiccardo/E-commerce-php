@@ -2,7 +2,11 @@
 $errorMsg = '';
 
 if (isset($_SESSION['user'])) {
-    header('Location: ../public');
+    if($_SESSION['user']->is_admin) {
+        header('Location: ../admin');
+    } else {
+        header('Location: ../public');
+    }
 }
 
 if (isset($_POST['login'])) {
@@ -14,7 +18,12 @@ if (isset($_POST['login'])) {
     $result = $userMgr->login($email, $password);
 
     if ($result) {
-        header('Location: ../public');
+        if(!$_SESSION['user']->is_admin){
+            header('Location: ../public');
+        } else {
+            header('Location: ../admin');
+        }
+        
     } else {
         $errorMsg = 'Mail o password errati';
     }
@@ -22,7 +31,7 @@ if (isset($_POST['login'])) {
 ?>
 
 <h2>Login</h2>
-<form method="POST">
+<form class="mt-3" method="POST">
     <div class="form-group">
         <label for="email">E-Mail</label>
         <input name="email" id="email" type="text" class="form-control" placeholder="es: mario.rossi@gmail.com">
@@ -42,3 +51,4 @@ if (isset($_POST['login'])) {
 
     <button class="btn btn-primary mt-1" name="login" type="submit">Login</button>
 </form>
+<p class="mt-4">Non hai un Account ? <a href="<?= ROOT_URL ?>auth/?page=sign_up">Registrati &raquo;</a></p>

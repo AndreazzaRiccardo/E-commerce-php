@@ -1,1 +1,3 @@
-<h2>Admin Profile</h2>
+<div class="p-5">
+    <h1>Singolo Utente</h1>
+</div>

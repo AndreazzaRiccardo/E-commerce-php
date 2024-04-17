@@ -33,4 +33,21 @@ class UserManager extends DBManager
         }
         return false;
     }
+
+    public function passwordMatch($pass1, $pass2){
+        return $pass1 == $pass2;
+    }
+
+    public function register($email, $password) {
+        $controlEmail = $this->db->query("SELECT * FROM users WHERE email = '$email'");
+        if(count($controlEmail) > 0){
+            return false;
+        }
+        $userID = $this->create([
+            'email' => $email,
+            'password' => md5($password),
+            'user_type_id' => 2
+        ]);
+        return $userID;
+    }
 }

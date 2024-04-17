@@ -169,6 +169,15 @@ class DBManager
         return $objects;
     }
 
+    public function filter($search) {
+        $results = $this->db->query("SELECT * FROM products WHERE name LIKE '%$search%'");
+        $objects = array();
+        foreach($results as $result){
+            array_push($objects, (object)$result);
+        }
+        return $objects;
+    }
+
     public function create($obj)
     {
         $newId = $this->db->insert_one($this->tableName, (array)$obj);

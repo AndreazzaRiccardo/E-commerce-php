@@ -1,1 +1,3 @@
-<h2>Lista Ordini</h2>
+<div class="p-5">
+    <h1>Ordini</h1>
+</div>

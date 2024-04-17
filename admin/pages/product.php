@@ -1,1 +1,3 @@
-<h1>Dettagli prodotto</h1>
+<div class="p-5">
+    <h1>Singolo Prodotto</h1>
+</div>

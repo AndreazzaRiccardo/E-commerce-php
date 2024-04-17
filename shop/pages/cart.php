@@ -21,7 +21,7 @@ $cart_items = $cm->getCartItems($cartID);
 
 ?>
 
-<div class="col-10 order-md-last">
+<div class="col-12 order-md-last">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-primary">CARRELLO</span>
         <?php if (count($cart_items) > 0) { ?>
@@ -37,7 +37,7 @@ $cart_items = $cm->getCartItems($cartID);
                             <h6 class="my-0"><?= $item['name'] ?></h6>
                         </div>
                         <div class="col-6 col-lg-2 d-flex align-items-center">
-                            <span class="text-muted"><?= $item['single_price'] ?></span>
+                            <span class="text-muted"><?= $item['single_price'] ?>€</span>
                         </div>
                         <div class="col-6 col-lg-4">
                             <form method="POST">
