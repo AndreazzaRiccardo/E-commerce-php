@@ -12,11 +12,6 @@ $cart_total = $cm->getCartTotal($cartID);
 <script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
 
 <script src="<?= ROOT_URL ?>/assets/js/main.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector('.total-items').innerHTML = '<?php echo $cart_total['num_products']; ?>';
-    });
-</script>
 </body>
 
 </html>

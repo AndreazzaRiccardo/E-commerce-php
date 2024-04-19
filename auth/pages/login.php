@@ -2,7 +2,7 @@
 $errorMsg = '';
 
 if (isset($_SESSION['user'])) {
-    if($_SESSION['user']->is_admin) {
+    if ($_SESSION['user']->is_admin) {
         header('Location: ../admin');
     } else {
         header('Location: ../public');
@@ -18,12 +18,11 @@ if (isset($_POST['login'])) {
     $result = $userMgr->login($email, $password);
 
     if ($result) {
-        if(!$_SESSION['user']->is_admin){
+        if (!$_SESSION['user']->is_admin) {
             header('Location: ../public');
         } else {
             header('Location: ../admin');
         }
-        
     } else {
         $errorMsg = 'Mail o password errati';
     }

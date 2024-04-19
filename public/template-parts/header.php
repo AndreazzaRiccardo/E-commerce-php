@@ -1,3 +1,13 @@
+<?php
+$current_page = $_SERVER['REQUEST_URI'];
+
+if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false) {
+    $disabled = 'disabled';
+} else {
+    $disabled = '';
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,13 +24,14 @@
 </head>
 
 <body>
-    <header class="p-2 bg-primary text-white">
+    <header class="p-2 bg-primary text-white shadow">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                <a href="<?php if(!$_SESSION['user']->is_admin) { echo ROOT_URL . 'public/?page=homepage'; } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
+                <a href="<?php if (!$_SESSION['user']->is_admin) {
+                                echo ROOT_URL . 'public/?page=homepage';
+                            } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     PHP E-commerce
                 </a>
-                <?php if (!$_SESSION['user']->is_admin) { ?>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="<?= ROOT_URL ?>public/?page=about" class="nav-link px-2 text-white">Chi Siamo</a></li>
                     <li><a href="<?= ROOT_URL ?>public/?page=services" class="nav-link px-2 text-white">Servizi</a></li>
@@ -28,53 +39,39 @@
                     <li><a href="<?= ROOT_URL ?>public/?page=contacts" class="nav-link px-2 text-white">Contatti</a></li>
                 </ul>
                 <form method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input id="searchbar" name="search" type="search" class="form-control form-control-dark" placeholder="Cerca per nome" aria-label="Search">
+                    <input <?= $disabled ?> id="searchbar" name="search" type="search" class="form-control form-control-dark" placeholder="Cerca per nome" aria-label="Search">
                 </form>
-                <?php } ?>
-                <div class="text-end">
+                <div class="d-flex">
 
                     <?php if (!isset($_SESSION['user'])) { ?>
-                        <a class="btn dropdown-toggle text-light text-truncate" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn dropdown-toggle text-light text-truncate fs-6" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Area Riservata
                         </a>
-                        <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="dropdown-menu bg-primary dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=login">Login</a></li>
                             <li>
                                 <hr class="dropdown-divider border-light">
                             </li>
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=sign_up">Sign-up</a></li>
-                        </ul> 
+                        </ul>
                     <?php } ?>
 
-                    <?php if (isset($_SESSION['user']) && !$_SESSION['user']->is_admin) { ?>
+                    <?php if (isset($_SESSION['user'])) { ?>
                         <a class="btn dropdown-toggle text-light text-truncate fs-6" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <?= $_SESSION['user']->email ?>
                         </a>
-                        <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="dropdown-menu bg-primary dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=logout">Logout</a></li>
                             <li>
                         </ul>
                     <?php } ?>
 
-                    <?php if (isset($_SESSION['user']) && $_SESSION['user']->is_admin) { ?>
-                        <a class="btn dropdown-toggle text-light text-truncate" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Amministrazione
-                        </a>
-                        <ul class="dropdown-menu bg-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>admin/?page=dashboard">Dashboard</a></li>
-                            <li>
-                            <hr class="dropdown-divider border-light">
-                            <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=logout">Logout</a></li>
-                            <li>
-                        </ul>
-                    <?php } ?>
 
-                    <?php if (!$_SESSION['user']->is_admin) { ?>
-                    <a class="btn btn-outline-warning ms-2 py-2 position-relative" href="<?= ROOT_URL ?>shop/?page=cart">
-                        <i class="fa-solid fa-cart-shopping fs-3"></i>
+                    <a class="btn btn-sm btn-outline-warning py-2 position-relative" href="<?= ROOT_URL ?>shop/?page=cart">
+                        <i class="fa-solid fa-cart-shopping fs-4"></i>
                         <span class="total-items fs-6 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"></span>
                     </a>
-                    <?php } ?>
+
                 </div>
             </div>
         </nav>

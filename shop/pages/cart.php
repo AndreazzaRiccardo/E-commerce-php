@@ -3,13 +3,12 @@
 $cm = new CartManager();
 $cartID = $cm->getCartID();
 
-
-if(isset($_POST['minus'])){
+if (isset($_POST['minus'])) {
     $productID = htmlspecialchars(trim($_POST['id']));
     $cm->removeFromCart($productID, $cartID);
 }
 
-if(isset($_POST['plus'])){
+if (isset($_POST['plus'])) {
 
     $productID = htmlspecialchars(trim($_POST['id']));
     $cm->addToCart($productID, $cartID);
@@ -17,8 +16,6 @@ if(isset($_POST['plus'])){
 
 $cart_total = $cm->getCartTotal($cartID);
 $cart_items = $cm->getCartItems($cartID);
-
-
 ?>
 
 <div class="col-12 order-md-last">
@@ -70,7 +67,7 @@ $cart_items = $cm->getCartItems($cartID);
 
         <hr>
 
-        <button class="btn btn-primary w-100">CHECKOUT</button>
+        <a href="?page=checkout" class="btn btn-primary w-100">CHECKOUT</a>
     <?php } else { ?>
         <p class="lead">Il tuo Carrello è vuoto</p>
         <a href="<?= ROOT_URL ?>shop/?page=products-list" class="btn btn-primary">Torna a fare acquisti &raquo;</a>

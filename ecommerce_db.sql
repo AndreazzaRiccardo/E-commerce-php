@@ -68,3 +68,25 @@ INSERT INTO users (email, password, user_type_id) VALUES
 ('admin@gmail.com', md5('ciao'), 1),
 ('mario.rossi@gmail.com', md5('ciao'), 2);
 
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    phone VARCHAR(30),
+    total_amount DECIMAL(10, 2),
+    cart_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES cart(id)
+);
+
+CREATE TABLE user_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    phone VARCHAR(30),
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+

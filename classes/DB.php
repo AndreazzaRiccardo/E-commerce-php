@@ -28,7 +28,8 @@ class DB
         return $data;
     }
 
-    public function execute($sql){
+    public function execute($sql)
+    {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
     }
@@ -112,7 +113,6 @@ class DB
 
     public function insert_one($tableName, $columns = array())
     {
-
         $strCol = '';
         foreach ($columns as $colName => $colValue) {
             $colName = mysqli_real_escape_string($this->conn, $colName);
@@ -169,10 +169,11 @@ class DBManager
         return $objects;
     }
 
-    public function filter($search) {
+    public function filter($search)
+    {
         $results = $this->db->query("SELECT * FROM products WHERE name LIKE '%$search%'");
         $objects = array();
-        foreach($results as $result){
+        foreach ($results as $result) {
             array_push($objects, (object)$result);
         }
         return $objects;

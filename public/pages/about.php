@@ -22,8 +22,9 @@
 
 <p>Sono entusiasta di condividere il mio portfolio con voi e di dimostrarvi ciò che ho realizzato fino ad oggi. Se siete interessati a collaborare o a discutere su progetti futuri, non esitate a contattarmi. Sono aperto a nuove sfide e sono pronto a mettermi al lavoro.
 
-Grazie per aver visitato il mio portfolio. Spero di poter collaborare con voi presto.</p>
+    Grazie per aver visitato il mio portfolio. Spero di poter collaborare con voi presto.</p>
 
 <p>Cordiali saluti, <br>
 
-<strong>Riccardo Andreazza</strong></p>
+    <strong>Riccardo Andreazza</strong>
+</p>

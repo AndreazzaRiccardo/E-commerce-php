@@ -53,5 +53,5 @@ if (isset($_POST['register'])) {
         <?php } ?>
     </div>
 
-    <button class="btn btn-primary mt-1" name="register" type="submit">Registrati</button>
+    <button class="btn btn-primary mt-1 mb-4" name="register" type="submit">Registrati</button>
 </form>

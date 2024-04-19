@@ -15,5 +15,6 @@ require_once __DIR__ . '/../classes/DB.php';
 require_once __DIR__ . '/../classes/Product.php';
 require_once __DIR__ . '/../classes/Cart.php';
 require_once __DIR__ . '/../classes/User.php';
-
-
+require_once __DIR__ . '/../classes/Category.php';
+require_once __DIR__ . '/../classes/Order.php';
+require_once __DIR__ . '/../classes/UserDetails.php';

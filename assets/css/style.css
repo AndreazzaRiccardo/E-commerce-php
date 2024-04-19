@@ -1,6 +1,22 @@
+/* Custom */
+
+.ms_card:hover {
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
+}
+
+.ms_btn_red:hover {
+    color: rgb(179, 0, 0) !important;
+}
+
+.ms_btn_yellow:hover {
+    color: #f2b969 !important;
+}
+
 .nav-link {
     border-bottom: 2px solid transparent !important;
     margin-bottom: -3px;
+
     &:hover {
         border-bottom: 2px solid white !important;
     }
@@ -18,6 +34,52 @@
 @media screen and (max-width: 766px) {
     #sidebarMenu {
         height: 100% !important;
+    }
+}
+
+/* Right main */
+
+.ms_right-main {
+    height: calc(100vh - 62px);
+    width: calc(100% - 82px);
+}
+
+@media screen and (min-width:992px) {
+    .ms_right-main {
+        width: calc(100% - 175px);
+    }
+}
+
+/* Main canvas */
+
+td {
+    text-align: center;
+}
+
+.ms_status {
+    border-radius: 10px;
+    padding: .1rem .4rem .3rem .4rem;
+    color: white;
+}
+
+tr td:nth-child(2),
+tr th:nth-child(2),
+tr td:nth-child(3),
+tr th:nth-child(3) {
+    display: none;
+}
+
+@media screen and (min-width:768px) {
+
+    thead th:first-child {
+        width: 35%;
+    }
+
+    tr td:nth-child(2),
+    tr th:nth-child(2),
+    tr td:nth-child(3),
+    tr th:nth-child(3) {
+        display: table-cell;
     }
 }
 

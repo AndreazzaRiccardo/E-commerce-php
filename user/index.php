@@ -9,7 +9,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 'dashboard';
 <main class="container mt-5">
     <div class="row">
         <div class="col-9">
-        <?php include __DIR__ . "/pages/" . $page . '.php' ?>
+            <?php include __DIR__ . "/pages/" . $page . '.php' ?>
         </div>
         <?php include __DIR__ . "/../public/template-parts/sidebar.php" ?>
 

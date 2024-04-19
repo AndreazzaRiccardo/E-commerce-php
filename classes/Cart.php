@@ -14,7 +14,8 @@ class CartManager extends DBManager
         $this->initClientIDSession();
     }
 
-    public function getCartTotal($cartID) {
+    public function getCartTotal($cartID)
+    {
         $result = $this->db->query("
         SELECT SUM(quantity) as num_products, SUM(quantity* price) as total
         FROM cart_product
@@ -25,7 +26,8 @@ class CartManager extends DBManager
         return $result[0];
     }
 
-    public function getCartItems($cartID) {
+    public function getCartItems($cartID)
+    {
         return $result = $this->db->query("
         SELECT products.name as name,
             products.price as single_price,
@@ -106,6 +108,13 @@ class CartManager extends DBManager
             $_SESSION['client_id'] = $str;
             $this->clientID = $str;
         }
+    }
+
+    public function startNewClientSession()
+    {
+        $str = substr(md5(mt_rand()), 0, 20);
+        $_SESSION['client_id'] = $str;
+        $this->clientID = $str;
     }
 }
 
