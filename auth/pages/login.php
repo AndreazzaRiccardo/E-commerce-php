@@ -1,8 +1,8 @@
 <?php
 $errorMsg = '';
 
-if (isset($_SESSION['user'])) {
-    if ($_SESSION['user']->is_admin) {
+if (isset($_SESSION['users'])) {
+    if ($_SESSION['users']->is_admin) {
         header('Location: ../admin');
     } else {
         header('Location: ../public');
@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
     $result = $userMgr->login($email, $password);
 
     if ($result) {
-        if (!$_SESSION['user']->is_admin) {
+        if (!$_SESSION['users']->is_admin) {
             header('Location: ../public');
         } else {
             header('Location: ../admin');

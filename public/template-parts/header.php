@@ -27,7 +27,7 @@ if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false)
     <header class="p-2 bg-primary text-white shadow">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                <a href="<?php if (!$_SESSION['user']->is_admin) {
+                <a href="<?php if (!$_SESSION['users']->is_admin) {
                                 echo ROOT_URL . 'public/?page=homepage';
                             } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     PHP E-commerce
@@ -43,7 +43,7 @@ if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false)
                 </form>
                 <div class="d-flex">
 
-                    <?php if (!isset($_SESSION['user'])) { ?>
+                    <?php if (!isset($_SESSION['users'])) { ?>
                         <a class="btn dropdown-toggle text-light text-truncate fs-6" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Area Riservata
                         </a>
@@ -56,9 +56,9 @@ if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false)
                         </ul>
                     <?php } ?>
 
-                    <?php if (isset($_SESSION['user'])) { ?>
+                    <?php if (isset($_SESSION['users'])) { ?>
                         <a class="btn dropdown-toggle text-light text-truncate fs-6" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= $_SESSION['user']->email ?>
+                            <?= $_SESSION['users']->email ?>
                         </a>
                         <ul class="dropdown-menu bg-primary dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=logout">Logout</a></li>

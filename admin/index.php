@@ -1,7 +1,7 @@
 <?php include "../inc/config.php" ?>
 
 <?php
-if (!$_SESSION['user']->is_admin) {
+if (!$_SESSION['users']->is_admin) {
     die;
 }
 

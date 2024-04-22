@@ -3,7 +3,7 @@ include "../inc/config.php";
 
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 
-if ($_SESSION['user']->is_admin) {
+if ($_SESSION['users']->is_admin) {
     header('Location: ../admin');
 }
 

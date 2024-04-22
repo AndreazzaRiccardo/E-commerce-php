@@ -2,10 +2,10 @@
     <h2><?= $_GET['message'] ?></h2>
 <?php } else { ?>
     <h1>Benvenuti</h1>
-    <?php if (!isset($_SESSION['user'])) { ?>
+    <?php if (!isset($_SESSION['users'])) { ?>
         <p class="lead">Benvenuti nel mio sito Portfolio !</p>
     <?php } else { ?>
-        <p class="lead">Bentornato <?= $_SESSION['user']->email ?> !</p>
+        <p class="lead">Bentornato <?= $_SESSION['users']->email ?> !</p>
     <?php } ?>
     <p class="lead">Clicca per iniziare ad acquistare o scorri le pagine per saperne di più su di me !</p>
 <?php } ?>

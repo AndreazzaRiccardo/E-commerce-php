@@ -1,7 +1,7 @@
 <?php
 $errorMsg = '';
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['users'])) {
     header('Location: ../public');
 }
 

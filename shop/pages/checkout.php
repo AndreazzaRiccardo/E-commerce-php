@@ -7,8 +7,8 @@ $userMgr = new UserManager();
 $orderMgr = new OrderManager();
 $cm = new CartManager();
 
-if (isset($_SESSION['user'])) {
-    $userID = $_SESSION['user']->id;
+if (isset($_SESSION['users'])) {
+    $userID = $_SESSION['users']->id;
     $user = $userMgr->get($userID);
     $detailsMgr = new UserDetailsManager();
     $details = $detailsMgr->getDetails($userID);

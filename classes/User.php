@@ -27,7 +27,7 @@ class UserManager extends DBManager
                 'is_admin' => $user->user_type_id == 1
             ];
 
-            $_SESSION['user'] = $user;
+            $_SESSION['users'] = $user;
 
             return true;
         }
