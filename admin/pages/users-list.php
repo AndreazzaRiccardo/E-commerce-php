@@ -1,16 +1,17 @@
 <?php
 
 $usersMgr = new UserManager();
-$users = $usersMgr->getAll();
+$users = $usersMgr->getAll(10, 1);
 
 ?>
 
-<div class="p-5">
+<div class="p-2">
   <h1>Utenti</h1>
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Email</th>
+        <th scope="col" class="text-center">ID</th>
         <th scope="col" class="text-center">Tipo Utente</th>
         <th scope="col" class="text-center">Dettagli</th>
       </tr>
@@ -18,7 +19,8 @@ $users = $usersMgr->getAll();
     <tbody>
       <?php foreach ($users as $user) { ?>
         <tr>
-          <th><?= $user->email ?></th>
+          <th class="text-truncate" style="max-width: 150px;"><?= $user->email ?></th>
+          <td><?= $user->id ?></td>
           <td><?php if ($user->user_type_id == 1) {
                 echo 'Admin';
               } else {

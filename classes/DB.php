@@ -34,7 +34,7 @@ class DB
         $stmt->execute();
     }
 
-    public function select_all($tableName, $columns = array())
+    public function select_all($tableName, $columns = [], $perPage = null, $page = null)
     {
         $query = 'SELECT ';
 
@@ -46,6 +46,11 @@ class DB
 
         $query .= $strCol . ' FROM ' . $tableName;
 
+        if ($perPage !== null && $page !== null) {
+            $offset = ($page - 1) * $perPage;
+            $query .= ' LIMIT ' . $perPage . ' OFFSET ' . $offset;
+        }
+
         $result = mysqli_query($this->conn, $query);
         $resultArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -54,7 +59,7 @@ class DB
         return $resultArray;
     }
 
-    public function select_one($tableName, $columns = array(), $id)
+    public function select_one(string $tableName, int $id, array $columns = [])
     {
 
         $strCol = '';
@@ -88,7 +93,7 @@ class DB
         }
     }
 
-    public function update_one($tableName, $columns = array(), $id)
+    public function update_one(string $tableName, int $id, array $columns = [])
     {
         $id = mysqli_real_escape_string($this->conn, $id);
         $strCol = '';
@@ -111,7 +116,7 @@ class DB
         }
     }
 
-    public function insert_one($tableName, $columns = array())
+    public function insert_one($tableName, $columns = [])
     {
         $strCol = '';
         foreach ($columns as $colName => $colValue) {
@@ -155,13 +160,13 @@ class DBManager
 
     public function get($id)
     {
-        $resultArr = $this->db->select_one($this->tableName, $this->columns, (int)$id);
+        $resultArr = $this->db->select_one($this->tableName, (int)$id, $this->columns);
         return (object) $resultArr;
     }
 
-    public function getAll()
+    public function getAll($perPage = null, $page = null)
     {
-        $results = $this->db->select_all($this->tableName, $this->columns);
+        $results = $this->db->select_all($this->tableName, $this->columns, $perPage, $page);
         $objects = array();
         foreach ($results as $result) {
             array_push($objects, (object)$result);
@@ -193,7 +198,7 @@ class DBManager
 
     public function update($obj, $id)
     {
-        $rowsDeleted = $this->db->update_one($this->tableName, (array)$obj, (int)$id);
+        $rowsDeleted = $this->db->update_one($this->tableName, (int)$id, (array)$obj);
         return (int) $rowsDeleted;
     }
 }

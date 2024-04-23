@@ -4,25 +4,43 @@ if (!defined('ROOT_URL')) {
 }
 
 $productMgr = new ProductManager();
+$currentPage = isset($_GET['n_page']) ? intval($_GET['n_page']) : 1;
 
 if (isset($_POST['delete'])) {
     $productID = htmlspecialchars(trim($_POST['id']));
     $productMgr->delete($productID);
 }
 
-if ($_GET['search'] != '') {
+if (isset($_GET['search'])) {
     $products = $productMgr->filter($_GET['search']);
 } else {
-    $products = $productMgr->getAll();
+    $products = $productMgr->getAll(10, $currentPage);
+}
+
+// Paginazione
+
+$disabledPrev = '';
+$disabledNext = '';
+if(isset($_GET['n_page']) && $_GET['n_page'] == 1){
+    $disabledPrev = 'disabled';
+} elseif (count($products) < 10) {
+    $disabledNext = 'disabled';
 }
 
 ?>
 
-<?php if ($_GET['search'] != '') { ?>
+<?php if (isset($_GET['search'])) { ?>
     <a class="ps-1 fs-4" href="<?= ROOT_URL ?>admin/?page=products-list">
         << Lista Prodotti</a>
         <?php } else { ?>
-            <a class="btn btn-success mt-4 ms-4 rounded" href="<?= ROOT_URL ?>admin/?page=create_product">Crea prodotto</a>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <a class="btn btn-success rounded fs-4" href="<?= ROOT_URL ?>admin/?page=create_product">+</a>
+                <form id="paginationForm" method="GET">
+                    <input type="hidden" id="page" name="n_page" min="1" value="<?php echo $currentPage; ?>">
+                    <button <?= $disabledPrev ?> type="button" id="prevPage" class="btn btn-sm btn-dark mr-2"><<</button>
+                    <button <?= $disabledNext ?> type="button" id="nextPage" class="btn btn-sm btn-dark">>></button>
+                </form>
+            </div>
         <?php } ?>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 row-cols-xll-6 mt-4">
@@ -44,7 +62,7 @@ if ($_GET['search'] != '') {
                                                 <p class="text-truncate m-0"><?= $product->description ?></p>
                                             </button>
                                         </h2>
-                                        <div id="flush-collapseOne<?= $product->id ?>" class="accordion-collapse collapse z-index" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div id="flush-collapseOne<?= $product->id ?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body"><?= $product->description ?></div>
                                         </div>
                                     </div>
@@ -67,3 +85,4 @@ if ($_GET['search'] != '') {
             <?php } ?>
         </div>
         <?php require_once __DIR__ . "/../template-parts/modal.php" ?>
+        <script src="<?= ROOT_URL ?>/assets/js/pagination.js"></script>

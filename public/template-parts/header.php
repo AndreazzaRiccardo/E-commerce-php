@@ -1,12 +1,4 @@
-<?php
-$current_page = $_SERVER['REQUEST_URI'];
 
-if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false) {
-    $disabled = 'disabled';
-} else {
-    $disabled = '';
-}
-?>
 
 <!DOCTYPE html>
 
@@ -24,10 +16,11 @@ if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false)
 </head>
 
 <body>
-    <header class="p-2 bg-primary text-white shadow">
+<div id="backgroundContainer"></div>
+    <header class="p-2 bg-primary text-white shadow position-fixed top-0 left-0 w-100">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                <a href="<?php if (!$_SESSION['users']->is_admin) {
+                <a href="<?php if (!isset($_SESSION['users']->is_admin)) {
                                 echo ROOT_URL . 'public/?page=homepage';
                             } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     PHP E-commerce
@@ -39,7 +32,7 @@ if (strpos($current_page, '/E-commerce-php/shop/?page=products-list') === false)
                     <li><a href="<?= ROOT_URL ?>public/?page=contacts" class="nav-link px-2 text-white">Contatti</a></li>
                 </ul>
                 <form method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input <?= $disabled ?> id="searchbar" name="search" type="search" class="form-control form-control-dark" placeholder="Cerca per nome" aria-label="Search">
+                    <input id="searchbar" name="search" type="search" class="form-control form-control-dark" placeholder="Cerca per nome" aria-label="Search">
                 </form>
                 <div class="d-flex">
 

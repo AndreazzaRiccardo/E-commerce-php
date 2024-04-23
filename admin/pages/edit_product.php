@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES['image_path']['tmp_name'], $uploadFile)) {
                 // Aggiungi il percorso dell'immagine ai dati del form
                 $_POST['image_path'] = 'public/imgs/' . $uniqueID . '_' . basename($_FILES['image_path']['name']);
-                
             }
         }
     }

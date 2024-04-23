@@ -1,7 +1,12 @@
 <?php
+
 if (!defined('ROOT_URL')) {
     die;
 }
+
+$productMgr = new ProductManager();
+$currentPage = isset($_GET['n_page']) ? intval($_GET['n_page']) : 1;
+
 
 // Logica carrello
 
@@ -15,19 +20,40 @@ if (isset($_POST['add_to_cart'])) {
     $cm->addToCart($productID, $cartID);
 }
 
-$productMgr = new ProductManager();
 
+// Ricerca
 
-if ($_GET['search'] != '') {
+if (isset($_GET['search'])) {
     $products = $productMgr->filter($_GET['search']);
 } else {
-    $products = $productMgr->getAll();
+    $products = $productMgr->getAll(9, $currentPage);
+}
+
+
+// Paginazione
+
+$disabledPrev = '';
+$disabledNext = '';
+if(isset($_GET['n_page']) && $_GET['n_page'] == 1){
+    $disabledPrev = 'disabled';
+} elseif (count($products) < 9) {
+    $disabledNext = 'disabled';
 }
 ?>
 
-<?php if ($_GET['search'] != '') { ?>
+<?php if (isset($_GET['search'])) { ?>
     <a class="ps-1 fs-4" href="<?= ROOT_URL ?>shop/?page=products-list">
         << Lista Prodotti</a>
+        <?php } else { ?>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <h2>I nostri prodotti</h2>
+                <form id="paginationForm" method="GET">
+                    <input type="hidden" id="page" name="n_page" min="1" value="<?php echo $currentPage; ?>">
+                    <button <?= $disabledPrev ?> type="button" id="prevPage" class="btn btn-sm btn-dark mr-2"><<</button>
+                    <button <?= $disabledNext ?> type="button" id="nextPage" class="btn btn-sm btn-dark">>></button>
+                </form>
+            </div>
+
         <?php } ?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xll-4 mt-4">
             <?php if ($products) { ?>
@@ -35,7 +61,7 @@ if ($_GET['search'] != '') {
                     <div class="col p-3">
                         <div class="card ms_card shadow">
                             <img src="<?php
-                                        $image_path = $product->image_path ? ROOT_URL . $product->image_path : ROOT_URL . "/public/imgs/noimg.jpg";
+                                        $image_path = $product->image_path ? ROOT_URL . $product->image_path : ROOT_URL . "/assets/imgs/noimg.jpg";
                                         echo $image_path;
                                         ?>" class="card-img-top" style="height: 200px; object-fit: contain;" alt="<?= "Immagine" . ' ' . $product->name ?>">
                             <div class="card-body d-flex flex-column justify-content-between">
@@ -48,7 +74,7 @@ if ($_GET['search'] != '') {
                                                 <p class="text-truncate m-0"><?= $product->description ?></p>
                                             </button>
                                         </h2>
-                                        <div id="flush-collapseOne<?= $product->id ?>" class="accordion-collapse collapse z-index" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div id="flush-collapseOne<?= $product->id ?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body"><?= $product->description ?></div>
                                         </div>
                                     </div>
@@ -72,3 +98,5 @@ if ($_GET['search'] != '') {
                 <h2>Nessun Prodotto Disponibile</h2>
             <?php } ?>
         </div>
+
+        <script src="<?= ROOT_URL ?>/assets/js/pagination.js"></script>

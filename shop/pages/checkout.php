@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'total_amount' => $cart_total,
         'cart_id' => $cartID
     ]);
-    if ($details == null) {
+    if (isset($details) && $details == null) {
         $detailsMgr->create((object)[
             'name' => $_POST['name'],
             'address' => $_POST['address'],
@@ -46,20 +46,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
-                <input name="name" required type="text" value="<?= $details['name'] ?>" class="form-control" id="name" aria-describedby="emailHelp">
+                <input name="name" required type="text" value="<?= isset($details['name']) ? htmlspecialchars($details['name']) : '' ?>" class="form-control" id="name" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input name="email" required type="email" class="form-control" value="<?= $user->email ?>" id="email" aria-describedby="emailHelp">
+                <input name="email" required type="email" class="form-control" value="<?= isset($user->email) ? $user->email : '' ?>" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input name="address" value="<?= $details['address'] ?>" required type="text" class="form-control" id="address">
+                <input name="address" value="<?= isset($details['address']) ? htmlspecialchars($details['address']) : '' ?>" required type="text" class="form-control" id="address">
             </div>
 
             <div class="mb-3">
                 <label for="phone" class="form-label">Telefono</label>
-                <input name="phone" value="<?= $details['phone'] ?>" required type="tel" class="form-control" id="phone">
+                <input name="phone" value="<?= isset($details['phone']) ? htmlspecialchars($details['phone']) : '' ?>" required type="tel" class="form-control" id="phone">
             </div>
 
             <button type="submit" class="btn btn-primary">Compra</button>

@@ -15,7 +15,7 @@ if (!(property_exists($user, 'id'))) {
   exit;
 }
 
-if ($_POST['id']) {
+if (isset($_POST['id'])) {
   $my_user->changeType($_POST['id']);
   header('Location: ../admin/?page=users-list');
 }
@@ -27,13 +27,13 @@ if ($_POST['id']) {
     <div class="card-body">
       <h5 class="card-title mb-3">Dettagli</h5>
       <p class="card-text"><strong>Tipo Utente:</strong> <?php if ($user->user_type_id == 1) {
-                              echo 'Admin';
-                            } else {
-                              echo 'Regular';
-                            } ?></p>
-      <p class="card-text"><strong>Nome:</strong> <?= $details['name'] ?></p>
-      <p class="card-text"><strong>Indirizzo:</strong> <?= $details['address'] ?></p>
-      <p class="card-text"><strong>Telefono:</strong> <?= $details['phone'] ?></p>
+                                                            echo 'Admin';
+                                                          } else {
+                                                            echo 'Regular';
+                                                          } ?></p>
+      <p class="card-text"><strong>Nome:</strong> <?= isset($details['name']) ? $details['name'] : 'Info non disponibile' ?></p>
+      <p class="card-text"><strong>Indirizzo:</strong> <?= isset($details['address']) ? $details['address'] : 'Info non disponibile' ?></p>
+      <p class="card-text"><strong>Telefono:</strong> <?= isset($details['phone']) ? $details['phone'] : 'Info non disponibile' ?></p>
       <hr>
       <form class="text-end" method="POST">
         <input name="id" type="hidden" value="<?= $user->id ?>">

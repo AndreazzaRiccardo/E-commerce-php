@@ -16,6 +16,8 @@ class UserDetailsManager extends DBManager
         FROM user_details
         JOIN users ON user_details.user_id = users.id
         WHERE users.id = '$id';");
-        return $result[0];
+        if (count($result) > 0) {
+            return $result[0];
+        }
     }
 }

@@ -21,7 +21,7 @@ $cart_items = $cm->getCartItems($cartID);
 
 ?>
 
-<div class="col-3 d-none d-lg-block">
+<div class="col-0 col-lg-3 d-none d-lg-block h-100">
     <div class="card shadow"">
         <div class=" card-body">
         <h5 class="card-title text-center fs-3">CARRELLO</h5>

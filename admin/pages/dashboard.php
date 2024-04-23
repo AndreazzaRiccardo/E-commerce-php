@@ -14,8 +14,8 @@ $products = $productMgr->getWithCategory();
             <div class="card-header h2">
               Lista Prodotti
             </div>
-            <div class="card-body">
-              <table class="table table-hover">
+            <div class="card-body d-flex flex-column">
+              <table id="myTable" class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Nome</th>
@@ -25,16 +25,17 @@ $products = $productMgr->getWithCategory();
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($products as $product) { ?>
-                  <tr>
-                    <th><?= $product['name'] ?></th>
-                    <td><?= $product['price'] ?> €</td>
-                    <td><?= $product['category_name'] ?></td>
-                    <td><span class="bg-success ms_status">Done</span></td>
-                  </tr>
+                  <?php foreach ($products as $product) { ?>
+                    <tr>
+                      <th><?= $product['name'] ?></th>
+                      <td><?= $product['price'] ?> €</td>
+                      <td><?= $product['category_name'] ?></td>
+                      <td><span class="bg-success ms_status">Done</span></td>
+                    </tr>
                   <?php } ?>
                 </tbody>
               </table>
+              <button id="expandButton" class="btn btn-success">Espandi</button>
             </div>
           </div>
         </div>
@@ -85,7 +86,7 @@ $products = $productMgr->getWithCategory();
         <div class="col-12">
           <div class="card">
             <div class="card">
-              <img src="<?= ROOT_URL ?>/public/imgs/stats.jpeg" class="card-img-top" alt="...">
+              <img src="<?= ROOT_URL ?>/assets/imgs/stats.jpeg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Utenti attivi</h5>
                 <p class="card-text">Lista degli utenti attivi in piattaforma nell'ultimo mese</p>
@@ -105,3 +106,27 @@ $products = $productMgr->getWithCategory();
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var table = document.getElementById("myTable");
+  var expandButton = document.getElementById("expandButton");
+
+  var maxRows = 10;
+
+  if (table.rows.length > maxRows) {
+    
+    for (var i = maxRows; i < table.rows.length; i++) {
+      table.rows[i].style.display = "none";
+    }
+  
+    expandButton.style.display = "block";
+
+    expandButton.addEventListener("click", function() {
+      for (var i = maxRows; i < table.rows.length; i++) {
+        table.rows[i].style.display = "table-row";
+      }
+      expandButton.style.display = "none";
+    });
+  }
+});</script>

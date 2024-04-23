@@ -4,7 +4,7 @@ $cartID = $cm->getCartID();
 $cart_total = $cm->getCartTotal($cartID);
 ?>
 
-<footer class="bg-primary pt-3 pb-1">
+<footer class="bg-primary pt-3 pb-1 mt-4">
     <p class="container text-light">By Riccardo Andreazza, Copyright &copy; 2024</p>
 </footer>
 

@@ -3,8 +3,10 @@ include "../inc/config.php";
 
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 
-if ($_SESSION['users']->is_admin) {
-    header('Location: ../admin');
+if (isset($_SESSION['users'])) {
+    if ($_SESSION['users']->is_admin) {
+        header('Location: ../admin');
+    }
 }
 
 ?>
@@ -13,7 +15,7 @@ if ($_SESSION['users']->is_admin) {
 
 <?php include __DIR__ . "/template-parts/header.php" ?>
 
-<main class="container mt-5" style="min-height: 62vh;">
+<main class="container mt-5 ms_main" style="min-height: 90vh;">
     <div class="row">
         <div class="col-12 col-lg-9">
             <?php include __DIR__ . "/pages/" . $page . '.php' ?>

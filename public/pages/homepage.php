@@ -1,4 +1,4 @@
-<?php if ($_GET['message']) { ?>
+<?php if (isset($_GET['message'])) { ?>
     <h2><?= $_GET['message'] ?></h2>
 <?php } else { ?>
     <h1>Benvenuti</h1>

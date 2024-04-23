@@ -1,4 +1,7 @@
-<div class="row">
+<div class="row align-items-center">
+  <div class="col-md-3">
+    <img class="mb-3" src="<?= ROOT_URL . '/assets/imgs/photo.png' ?>" alt="My photo" style="width: 200px;">
+  </div>
   <div class="col-md-6">
     <h2>Contatti</h2>
     <ul class="contact-info list-unstyled">
@@ -7,7 +10,7 @@
       <li><strong>Indirizzo:</strong> Via Turati n.25, Milano (IT)</li>
     </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <h2>Social</h2>
     <ul class="social-icons list-unstyled">
       <li><a href="https://www.facebook.com/Andr3azz/?locale=it_IT" target="_blank"><i class="fab fa-facebook me-2"></i>Facebook</a></li>

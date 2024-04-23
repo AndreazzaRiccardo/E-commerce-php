@@ -5,10 +5,13 @@ if (!$_SESSION['users']->is_admin) {
     die;
 }
 
-if (isset($_GET['search'])) {
+$page = '';
+if(isset($_GET["page"])) {
+    $page = $_GET["page"];
+} elseif (isset($_GET["n_page"]) || isset($_GET["search"])) {
     $page = 'products-list';
 } else {
-    $page = isset($_GET["page"]) ? $_GET["page"] : 'dashboard';
+    $page = 'dashboard';
 }
 
 ?>
@@ -16,8 +19,8 @@ if (isset($_GET['search'])) {
 
 <?php include __DIR__ . "/../admin/template-parts/header.php" ?>
 
-<main class="container-fluid">
-    <div class="row d-block d-md-flex" style="min-height: 62vh;">
+<main class="container-fluid admin_main">
+    <div class="row d-block d-md-flex" style="min-height: 90vh;">
         <?php include __DIR__ . "/../admin/template-parts/sidebar.php" ?>
         <div class="col-12 col-md-11 px-5 my-4">
             <?php include __DIR__ . "/pages/" . $page . '.php' ?>
