@@ -107,9 +107,11 @@ CREATE TABLE orders (
     phone VARCHAR(30),
     total_amount DECIMAL(10, 2),
     cart_id INT,
+    user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (cart_id) REFERENCES cart(id)
+    FOREIGN KEY (cart_id) REFERENCES cart(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 CREATE TABLE user_details (

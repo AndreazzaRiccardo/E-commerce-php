@@ -20,9 +20,7 @@
     <header class="p-2 bg-primary text-white shadow position-fixed top-0 left-0 w-100">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                <a href="<?php if (!isset($_SESSION['users']->is_admin)) {
-                                echo ROOT_URL . 'public/?page=homepage';
-                            } ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
+                <a href="<?= ROOT_URL . 'public/?page=homepage'; ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     PHP E-commerce
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -54,6 +52,8 @@
                             <?= $_SESSION['users']->email ?>
                         </a>
                         <ul class="dropdown-menu bg-primary dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>shop/?page=my-orders">I miei ordini</a></li>
+                            <li>
                             <li><a class="dropdown-item text-light" href="<?= ROOT_URL ?>auth/?page=logout">Logout</a></li>
                             <li>
                         </ul>

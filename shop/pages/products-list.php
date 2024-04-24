@@ -34,7 +34,7 @@ if (isset($_GET['search'])) {
 
 $disabledPrev = '';
 $disabledNext = '';
-if(isset($_GET['n_page']) && $_GET['n_page'] == 1){
+if(isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])){
     $disabledPrev = 'disabled';
 } elseif (count($products) < 9) {
     $disabledNext = 'disabled';

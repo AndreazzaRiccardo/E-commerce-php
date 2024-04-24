@@ -18,14 +18,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cartID = $cm->getCartID();
     $query = $cm->getCartTotal($cartID);
     $cart_total = $query['total'];
-    $orderMgr->create((object)[
-        'name' => $_POST['name'],
-        'address' => $_POST['address'],
-        'phone' => $_POST['phone'],
-        'total_amount' => $cart_total,
-        'cart_id' => $cartID
-    ]);
-    if (isset($details) && $details == null) {
+    if(isset($_SESSION['users'])) {
+        $orderMgr->create((object)[
+            'name' => $_POST['name'],
+            'address' => $_POST['address'],
+            'phone' => $_POST['phone'],
+            'total_amount' => $cart_total,
+            'cart_id' => $cartID,
+            'user_id' => $userID
+        ]);
+    } else {
+        $orderMgr->create((object)[
+            'name' => $_POST['name'],
+            'address' => $_POST['address'],
+            'phone' => $_POST['phone'],
+            'total_amount' => $cart_total,
+            'cart_id' => $cartID,
+        ]);
+    }
+    if (isset($_SESSION['users']) && $details == null) {
         $detailsMgr->create((object)[
             'name' => $_POST['name'],
             'address' => $_POST['address'],
@@ -62,7 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input name="phone" value="<?= isset($details['phone']) ? htmlspecialchars($details['phone']) : '' ?>" required type="tel" class="form-control" id="phone">
             </div>
 
-            <button type="submit" class="btn btn-primary">Compra</button>
+            <button <?= isset($_SESSION['users']) && $details == null ? 'disabled' : '' ?> id="buyButton" type="submit" class="btn btn-primary">Compra</button>
         </form>
+
+        <?php if (isset($_SESSION['users']) && $details == null) { ?>
+            <input class="mt-3" id="term" type="checkbox">
+            <label for="term">Acconsento al salvataggio dei miei dati per acquisti futuri</label>
+        <?php } ?>
     </div>
 </div>
+
+<script src="<?= ROOT_URL ?>/assets/js/termCheckbox.js"></script>

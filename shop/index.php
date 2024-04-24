@@ -6,7 +6,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 'products-list';
 
 <?php include __DIR__ . "/../public/template-parts/header.php" ?>
 
-<main class="container mt-5 position-relative ms_main" style="min-height: 80vh;">
+<main class="container mt-5 position-relative ms_main" style="min-height: 86vh;">
     <div class="row">
         <div class="col-12 col-lg-9">
             <?php include __DIR__ . "/pages/" . $page . '.php' ?>

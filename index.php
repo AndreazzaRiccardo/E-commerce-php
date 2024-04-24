@@ -24,6 +24,9 @@ if (mysqli_num_rows($result) == 0) {
     $sql_file = './ecommerce_db.sql';
     $sql_queries = file_get_contents($sql_file);
     mysqli_multi_query($first_conn, $sql_queries);
+    
+    header('Location: first_access.php');
+    die;
 }
 
 // Chiudi la connessione

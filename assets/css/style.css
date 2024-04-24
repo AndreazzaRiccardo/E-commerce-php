@@ -7,7 +7,7 @@
     height: 100%;
     background-image: url('../imgs/background.jpg');
     background-size: cover;
-    opacity: 0.3;
+    opacity: 0.2;
     z-index: -1;
   }
 
@@ -69,15 +69,7 @@ header {
 
 /* Right main */
 
-.ms_right-main {
-    height: calc(100vh - 62px);
-    width: calc(100% - 82px);
-}
-
 @media screen and (min-width:992px) {
-    .ms_right-main {
-        width: calc(100% - 175px);
-    }
 
     .ms_main {
         padding-top: 4rem;
@@ -92,6 +84,11 @@ header {
 
 td {
     text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    vertical-align: middle;
 }
 
 .ms_status {

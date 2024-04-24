@@ -15,12 +15,16 @@ if (isset($_SESSION['users'])) {
 
 <?php include __DIR__ . "/template-parts/header.php" ?>
 
-<main class="container mt-5 ms_main" style="min-height: 90vh;">
+<main class="container mt-5 ms_main" style="min-height: 86vh;">
     <div class="row">
         <div class="col-12 col-lg-9">
-            <?php include __DIR__ . "/pages/" . $page . '.php' ?>
+            <?php if(isset($_GET['search'])) {
+                include __DIR__ . "/../shop/pages/products-list.php";
+            } else {
+                include __DIR__ . "/pages/" . $page . '.php';
+            }  ?>
         </div>
-
+        
         <?php include __DIR__ . "/template-parts/sidebar.php" ?>
 
     </div>

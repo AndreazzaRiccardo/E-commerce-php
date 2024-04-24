@@ -29,7 +29,7 @@ if (!(property_exists($order, 'id'))) {
             <h5 class="card-title mb-3 text-center">Dettagli Ordine</h5>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                 <?php foreach ($orderDetails as $product) { ?>
-                    <div class="col text-center">
+                    <div class="col text-center border-bottom">
                         <p class="card-text"><?= $product['product_name'] ?> <strong>X <?= $product['quantity'] ?></strong> </p>
                     </div>
                 <?php } ?>
