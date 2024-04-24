@@ -37,11 +37,11 @@ if (isset($_POST['id'])) {
       <hr>
       <form class="text-end" method="POST">
         <input name="id" type="hidden" value="<?= $user->id ?>">
-        <button <?= $user->id == 1 ? 'disabled' : '' ?> class="btn btn-primary" type="submit">
+        <button <?= $user->id == 1 ? 'disabled' : '' ?> class="btn btn-warning text-dark fw-bold" type="submit">
           <?php if ($user->user_type_id == 1) {
-            echo 'Cambia a Regular';
+            echo 'Rendi Regular';
           } else {
-            echo 'Cambia ad Admin';
+            echo 'Rendi Admin';
           } ?>
         </button>
       </form>

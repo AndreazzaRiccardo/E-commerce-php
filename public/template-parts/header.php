@@ -60,7 +60,7 @@
                     <?php } ?>
 
 
-                    <a class="btn btn-sm btn-outline-warning py-2 position-relative" href="<?= ROOT_URL ?>shop/?page=cart">
+                    <a class="btn btn-sm btn-outline-warning py-2 position-relative d-flex align-items-center" href="<?= ROOT_URL ?>shop/?page=cart">
                         <i class="fa-solid fa-cart-shopping fs-4"></i>
                         <span class="total-items fs-6 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"></span>
                     </a>

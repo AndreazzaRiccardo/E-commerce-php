@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="file" class="form-control" id="cover_image" name="image_path">
                 </div>
 
-                <button class="btn btn-success mt-3" type="submit">Modifica</button>
+                <button class="btn btn-outline-warning mt-3" type="submit">Modifica</button>
             </form>
         </div>
     </div>

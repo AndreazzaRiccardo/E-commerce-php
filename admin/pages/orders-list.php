@@ -23,7 +23,7 @@ $orders = $ordersMgr->getAll(10, 1);
           <td><?= $order->id ?></td>
           <td><?= $order->total_amount ?> €</td>
           <td class="d-flex justify-content-center">
-            <a class="btn btn-sm btn-warning rounded" href="?page=order&id=<?= $order->id ?>">Dettagli</a>
+            <a class="btn btn-sm btn-outline-primary rounded" href="?page=order&id=<?= $order->id ?>">Dettagli</a>
           </td>
         </tr>
       <?php  } ?>

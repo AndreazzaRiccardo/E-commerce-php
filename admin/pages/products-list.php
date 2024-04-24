@@ -34,7 +34,7 @@ if(isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])){
         << Lista Prodotti</a>
         <?php } else { ?>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <a class="btn btn-success rounded fs-4" href="<?= ROOT_URL ?>admin/?page=create_product">+</a>
+                <a class="btn btn-sm btn-outline-primary rounded fs-4" href="<?= ROOT_URL ?>admin/?page=create_product">+</a>
                 <form id="paginationForm" method="GET">
                     <input type="hidden" id="page" name="n_page" min="1" value="<?php echo $currentPage; ?>">
                     <button <?= $disabledPrev ?> type="button" id="prevPage" class="btn btn-sm btn-dark mr-2"><<</button>

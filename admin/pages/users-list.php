@@ -28,7 +28,7 @@ $users = $usersMgr->getAll(10, 1);
               } ?>
           </td>
           <td class="d-flex justify-content-center">
-            <a class="btn btn-sm btn-warning rounded" href="?page=profile&id=<?= $user->id ?>">Dettagli</a>
+            <a class="btn btn-sm btn-outline-primary rounded" href="?page=profile&id=<?= $user->id ?>">Dettagli</a>
           </td>
         </tr>
       <?php  } ?>

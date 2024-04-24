@@ -71,9 +71,9 @@
 </head>
 <div id="backgroundContainer"></div>
 <body class="d-flex flex-column justify-content-center align-items-center vh-100">
-    <h1 id="intro" class="visible">Benvenuti sul mio sito portfolio</h1>
+    <h1 id="intro" class="visible text-center">Benvenuti sul mio sito portfolio</h1>
     <div id="content" class="d-flex flex-column justify-content-center align-items-center hidden">
-        <h2 id="subtitle">Clicca qui per continuare</h2>
+        <h2 id="subtitle" class="text-center">Clicca qui per continuare</h2>
         <a class="btn btn-primary" href="public">VAI</a>
     </div>
 
