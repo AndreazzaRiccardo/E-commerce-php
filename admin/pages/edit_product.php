@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-3">
                     <label for="cover_image" class="form-label">Immagine</label>
                     <?php if (!empty($product->image_path)) : ?>
-                        <img src="<?= ROOT_URL . $product->image_path ?>" alt="Immagine attuale" class="img-thumbnail mb-2 ms-5" style="max-width: 200px;">
+                        <img src="<?= ROOT_URL . $product->image_path ?>" alt="Immagine attuale" class="img-thumbnail mb-2 ms-1" style="max-width: 200px;">
                     <?php endif; ?>
                     <input type="file" class="form-control" id="cover_image" name="image_path">
                 </div>

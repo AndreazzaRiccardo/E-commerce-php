@@ -3,18 +3,12 @@
 class DB
 {
 
-    private $conn;
     public $pdo;
 
     public function __construct()
     {
-        global $conn;
-        $this->conn = $conn;
-        if (mysqli_connect_errno()) {
-            echo "Connessione al server fallita" . mysqli_connect_errno();
-            die;
-        }
-        $this->pdo = new PDO('mysql:dbname=' . DB_NAME . ';host=' . DB_HOST, DB_USER, DB_PASSW);
+        $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
+        $this->pdo = new PDO($dsn, DB_USER, DB_PASSW);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -37,13 +31,7 @@ class DB
     public function select_all($tableName, $columns = [], $perPage = null, $page = null)
     {
         $query = 'SELECT ';
-
-        $strCol = '';
-        foreach ($columns as $colName) {
-            $strCol .= ' ' . mysqli_real_escape_string($this->conn, $colName) . ',';
-        }
-        $strCol = substr($strCol, 0, -1);
-
+        $strCol = implode(',', $columns);
         $query .= $strCol . ' FROM ' . $tableName;
 
         if ($perPage !== null && $page !== null) {
@@ -51,111 +39,78 @@ class DB
             $query .= ' LIMIT ' . $perPage . ' OFFSET ' . $offset;
         }
 
-        $result = mysqli_query($this->conn, $query);
-        $resultArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        mysqli_free_result($result);
+        $stmt = $this->pdo->query($query);
+        $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultArray;
     }
 
     public function select_one(string $tableName, int $id, array $columns = [])
     {
-
-        $strCol = '';
-        foreach ($columns as $colName) {
-            $colName = mysqli_real_escape_string($this->conn, $colName);
-            $strCol .= ' ' . $colName . ',';
-        }
-        $strCol = substr($strCol, 0, -1);
-        $id = mysqli_real_escape_string($this->conn, $id);
-        $query = "SELECT $strCol FROM $tableName WHERE id = $id";
-
-        $result = mysqli_query($this->conn, $query);
-        $resultArray = mysqli_fetch_assoc($result);
-
-        mysqli_free_result($result);
+        $strCol = implode(',', $columns);
+        $query = "SELECT $strCol FROM $tableName WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id]);
+        $resultArray = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $resultArray;
     }
 
     public function delete_one($tableName, $id)
     {
-        $id = mysqli_real_escape_string($this->conn, $id);
-        $query = "DELETE FROM $tableName WHERE id = $id";
+        $query = "DELETE FROM $tableName WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id]);
+        $rowsAffected = $stmt->rowCount();
 
-        if (mysqli_query($this->conn, $query)) {
-            $rowsAffected = mysqli_affected_rows($this->conn);
-
-            return $rowsAffected;
-        } else {
-            return -1;
-        }
+        return $rowsAffected;
     }
 
     public function update_one(string $tableName, int $id, array $columns = [])
     {
-        $id = mysqli_real_escape_string($this->conn, $id);
-        $strCol = '';
+        $setStr = '';
         foreach ($columns as $colName => $colValue) {
-            $colName = mysqli_real_escape_string($this->conn, $colName);
-            $strCol .= ' ' . $colName . " = '$colValue' ,";
+            $setStr .= "$colName = :$colName,";
         }
+        $setStr = rtrim($setStr, ',');
 
-        $strCol = substr($strCol, 0, -1);
+        $query = "UPDATE $tableName SET $setStr WHERE id = :id";
+        $columns['id'] = $id;
 
-        $query = "UPDATE $tableName SET $strCol WHERE id = $id";
-        $query = str_replace("'NULL'", "NULL", $query);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($columns);
+        $rowsAffected = $stmt->rowCount();
 
-        if (mysqli_query($this->conn, $query)) {
-            $rowsAffected = mysqli_affected_rows($this->conn);
-
-            return $rowsAffected;
-        } else {
-            return -1;
-        }
+        return $rowsAffected;
     }
 
     public function insert_one($tableName, $columns = [])
     {
-        $strCol = '';
-        foreach ($columns as $colName => $colValue) {
-            $colName = mysqli_real_escape_string($this->conn, $colName);
-            $strCol .= ' ' . $colName . ',';
-        }
+        $colNames = implode(',', array_keys($columns));
+        $colPlaceholders = implode(',', array_fill(0, count($columns), '?'));
 
-        $strCol = substr($strCol, 0, -1);
+        $query = "INSERT INTO $tableName ($colNames) VALUES ($colPlaceholders)";
 
-        $strColValues = '';
-        foreach ($columns as $colName => $colValue) {
-            $colValue = mysqli_real_escape_string($this->conn, $colValue);
-            $strColValues .= " '" . $colValue . "' ,";
-        }
-        $strColValues = substr($strColValues, 0, -1);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(array_values($columns));
+        $lastId = $this->pdo->lastInsertId();
 
-        $query = "INSERT INTO $tableName ($strCol) VALUES ($strColValues)";
-
-        if (mysqli_query($this->conn, $query)) {
-            $lastId = mysqli_insert_id($this->conn);
-
-            return $lastId;
-        } else {
-            return -1;
-        }
+        return $lastId;
     }
 }
 
 
 class DBManager
 {
-
     protected $db;
     protected $columns;
     protected $tableName;
+    protected $pdo;
 
     public function __construct()
     {
         $this->db = new DB();
+        $this->pdo = $this->db->pdo;
     }
 
     public function get($id)
@@ -175,14 +130,18 @@ class DBManager
     }
 
     public function filter($search)
-    {
-        $results = $this->db->query("SELECT * FROM products WHERE name LIKE '%$search%'");
-        $objects = array();
-        foreach ($results as $result) {
-            array_push($objects, (object)$result);
-        }
-        return $objects;
+{
+    $query = "SELECT * FROM {$this->tableName} WHERE name LIKE :search";
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute(['search' => "%$search%"]);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $objects = array();
+    foreach ($results as $result) {
+        array_push($objects, (object)$result);
     }
+    return $objects;
+}
+
 
     public function create($obj)
     {

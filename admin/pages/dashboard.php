@@ -14,11 +14,12 @@ $products = $productMgr->getWithCategory();
             <div class="card-header h2">
               Lista Prodotti
             </div>
-            <div class="card-body d-flex flex-column">
+            <div class="card-body">
+              <div class="table-responsive">
               <table id="myTable" class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
+                    <th class="p-0" scope="col">Nome</th>
                     <th scope="col" class="text-center">Prezzo</th>
                     <th scope="col" class="text-center">Categoria</th>
                     <th scope="col" class="text-center">Stato</th>
@@ -35,7 +36,8 @@ $products = $productMgr->getWithCategory();
                   <?php } ?>
                 </tbody>
               </table>
-              <button id="expandButton" class="btn btn-success">Espandi</button>
+              </div>
+              <button id="expandButton" class="btn btn-success w-100">Espandi</button>
             </div>
           </div>
         </div>

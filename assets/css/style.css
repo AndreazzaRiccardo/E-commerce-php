@@ -97,27 +97,6 @@ th {
     color: white;
 }
 
-tr td:nth-child(2),
-tr th:nth-child(2),
-tr td:nth-child(3),
-tr th:nth-child(3) {
-    display: none;
-}
-
-@media screen and (min-width:768px) {
-
-    thead th:first-child {
-        width: 35%;
-    }
-
-    tr td:nth-child(2),
-    tr th:nth-child(2),
-    tr td:nth-child(3),
-    tr th:nth-child(3) {
-        display: table-cell;
-    }
-}
-
 #myTable {
     border-collapse: collapse;
     width: 100%;
