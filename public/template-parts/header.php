@@ -24,7 +24,7 @@
                     PHP E-commerce
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="<?= ROOT_URL ?>public/?page=about" class="nav-link px-2 text-white">Chi Siamo</a></li>
+                    <li><a href="<?= ROOT_URL ?>public/?page=about" class="nav-link px-2 text-white">Chi Sono</a></li>
                     <li><a href="<?= ROOT_URL ?>public/?page=services" class="nav-link px-2 text-white">Servizi</a></li>
                     <li><a href="<?= ROOT_URL ?>shop/?page=products-list" class="nav-link px-2 text-white">Prodotti</a></li>
                     <li><a href="<?= ROOT_URL ?>public/?page=contacts" class="nav-link px-2 text-white">Contatti</a></li>

@@ -1,7 +1,7 @@
 <?php if (isset($_GET['message'])) { ?>
     <h2><?= $_GET['message'] ?></h2>
 <?php } else { ?>
-    <h1>Benvenuti</h1>
+    <h1>Home Page</h1>
     <?php if (!isset($_SESSION['users'])) { ?>
         <p class="lead">Benvenuti nel mio sito Portfolio !</p>
     <?php } else { ?>

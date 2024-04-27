@@ -1,5 +1,5 @@
 <?php
-include "../inc/config.php";
+include __DIR__ . "/../inc/config.php";
 
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 

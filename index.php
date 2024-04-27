@@ -1,37 +1,97 @@
-<?php
-// Parametri per la connessione al database
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "ecommerce_db";
+<!DOCTYPE html>
+<html lang="en">
 
-$first_conn = mysqli_connect($servername, $username, $password);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing</title>
+    <link href="https://bootswatch.com/5/lux/bootstrap.css" rel="stylesheet">
+    <link href="https://bootswatch.com/_vendor/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+    <style>
+        .hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out, visibility 1s ease-in-out;
+            visibility: hidden;
+            position: absolute;
+            z-index: 1;
+            font-size: 3rem;
+        }
+        .visible {
+            font-size: 3rem;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 2s ease-in-out, transform 1s ease-in-out;
+            z-index: 2;
+        }
 
-// Verifica della connessione
-if (!$first_conn) {
-    die("Connessione fallita" . mysqli_connect_error());
-}
+        #subtitle {
+            font-size: 3rem;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .pulsing {
+            animation: pulse 5s infinite;
+        }
 
-$result = mysqli_query($first_conn, "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbname'");
+        #backgroundContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/imgs/background.jpg');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
+            animation: backgroundScroll 10s ease-in-out infinite;
+        }
+        @keyframes backgroundScroll {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+    </style>
+</head>
+<div id="backgroundContainer"></div>
+<body class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <h1 id="intro" class="visible text-center">Benvenuti sul mio sito portfolio</h1>
+    <div id="content" class="d-flex flex-column justify-content-center align-items-center hidden">
+        <h2 id="subtitle" class="text-center">Clicca qui per continuare</h2>
+        <a class="btn btn-primary" href="public">VAI</a>
+    </div>
 
-if (mysqli_num_rows($result) == 0) {
+    <script>
+        const intro = document.getElementById('intro');
+        const content = document.getElementById('content');
+        const subtitle = document.getElementById('subtitle');
 
-    $sql_create_db = "CREATE DATABASE $dbname";
-    mysqli_query($first_conn, $sql_create_db);
+        setTimeout(() => {
+            intro.classList.remove('visible');
+            intro.classList.add('hidden');
 
-    mysqli_select_db($first_conn, $dbname);
+            content.classList.remove('hidden');
+            content.classList.add('visible');
 
-    $sql_file = './ecommerce_db.sql';
-    $sql_queries = file_get_contents($sql_file);
-    mysqli_multi_query($first_conn, $sql_queries);
-    
-    header('Location: first_access.php');
-    die;
-}
+            content.classList.add('pulsing');
+        }, 2000);
+    </script>
+</body>
 
-// Chiudi la connessione
-mysqli_close($first_conn);
-
-require "./inc/config.php";
-header('Location: public');
-exit;
+</html>
