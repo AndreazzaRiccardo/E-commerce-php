@@ -21,11 +21,10 @@ $cart_items = $cm->getCartItems($cartID);
 
 ?>
 
-<div class="col-0 col-lg-3 d-none d-lg-block h-100">
-    <div class="card shadow"">
-        <div class=" card-body">
+
+<div class="card shadow">
+    <div class=" card-body">
         <h5 class="card-title text-center fs-3">CARRELLO</h5>
-        <div class="col-12 order-md-last">
             <?php if (count($cart_items) > 0) { ?>
                 <ul class="list-group mb-3">
                     <?php foreach ($cart_items as $item) { ?>
@@ -49,7 +48,7 @@ $cart_items = $cm->getCartItems($cartID);
                     <?php } ?>
                     <li class="list-group-item d-flex justify-content-between px-4">
                         <span>TOTALE EURO</span>
-                        <strong><?= $cart_total['total'] ?> €</strong>
+                        <strong><?= $cart_total['total'] . " €" ?></strong>
                     </li>
                 </ul>
                 <a href="<?= ROOT_URL ?>shop/?page=cart" class="btn btn-warning w-100 text-dark">Acquista</a>
@@ -58,9 +57,6 @@ $cart_items = $cm->getCartItems($cartID);
                     <i class="fa-solid fa-bag-shopping"></i>
                 </div>
                 <p class="card-text text-center">Aggiungi prodotti al carrello per cominciare a comprare</p>
-            <? } ?>
-
-        </div>
+            <?php } ?>
     </div>
-</div>
 </div>

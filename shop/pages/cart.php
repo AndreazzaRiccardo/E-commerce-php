@@ -69,5 +69,5 @@ $cart_items = $cm->getCartItems($cartID);
     <?php } else { ?>
         <p class="lead">Il tuo Carrello è vuoto</p>
         <a href="<?= ROOT_URL ?>shop/?page=products-list" class="btn btn-primary">Torna a fare acquisti &raquo;</a>
-    <? } ?>
+    <?php } ?>
 </div>

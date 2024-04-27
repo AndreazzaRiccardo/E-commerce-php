@@ -21,7 +21,7 @@
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
                 <a href="<?= ROOT_URL . 'public/?page=homepage'; ?>" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
-                    PHP E-commerce
+                    ShoPHPify
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="<?= ROOT_URL ?>public/?page=about" class="nav-link px-2 text-white">Chi Sono</a></li>

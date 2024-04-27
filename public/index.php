@@ -1,5 +1,6 @@
+<?php include "../inc/config.php"; ?>
+
 <?php
-include __DIR__ . "/../inc/config.php";
 
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 
@@ -11,9 +12,7 @@ if (isset($_SESSION['users'])) {
 
 ?>
 
-<?php  ?>
-
-<?php include __DIR__ . "/template-parts/header.php" ?>
+<?php include __DIR__ . "/../public/template-parts/header.php" ?>
 
 <main class="container mt-5 ms_main" style="min-height: 86vh;">
     <div class="row">
@@ -24,10 +23,11 @@ if (isset($_SESSION['users'])) {
                 include __DIR__ . "/pages/" . $page . '.php';
             }  ?>
         </div>
-        
-        <?php include __DIR__ . "/template-parts/sidebar.php" ?>
+        <div class="col-0 col-lg-3 d-none d-lg-block h-100">
+            <?php include __DIR__ . "/../public/template-parts/sidebar.php" ?>
+        </div>
 
     </div>
 </main>
 
-<?php include __DIR__ . "/template-parts/footer.php" ?>
+<?php include __DIR__ . "/../public/template-parts/footer.php" ?>

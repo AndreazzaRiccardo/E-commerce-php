@@ -19,7 +19,7 @@
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
                 <a href="#" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
-                    PHP E-commerce
+                    ShoPHPify
                 </a>
                 <div class="d-flex flex-column flex-sm-row justify-content-center">
                     <form method="GET" class="col-lg-auto mb-3 mb-lg-0 me-lg-3">
