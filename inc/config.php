@@ -10,7 +10,7 @@ define('ROOT_URL', "http://" . $_SERVER['HTTP_HOST'] . "/E-commerce-php/");
 define('DB_HOST', "localhost");
 define('DB_USER', "root");
 define('DB_PASSW', "root");
-define('DB_NAME', "ecommerce_db");
+define('DB_NAME', "e_commerce");
 
 require_once __DIR__ . '/../inc/globals.php';
 require_once __DIR__ . '/../classes/DB.php';

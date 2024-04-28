@@ -7,7 +7,7 @@ class OrderManager extends DBManager
     {
         parent::__construct();
         $this->tableName = 'orders';
-        $this->columns = array('id', 'name', 'address', 'phone', 'total_amount', 'cart_id', 'user_id');
+        $this->columns = array('id', 'name', 'address', 'phone', 'total_amount', 'note', 'cart_id', 'user_id');
     }
 
     public function getOrderDetails($cartID)

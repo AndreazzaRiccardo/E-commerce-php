@@ -46,39 +46,24 @@
     width: 250px !important;
 }
 
-
-@media screen and (max-width: 766px) {
-    #sidebarMenu {
-        height: 100% !important;
-    }
-
-
-}
-
 header {
     z-index: 3;
+    transition: top 1s;
 }
 
-.ms_main {
-    padding-top: 12rem;
+header.hidden {
+    top: -400px !important;
 }
 
-.admin_main {
-    padding-top: 10.5rem;
-}
+@media screen and (min-width: 577px) {
 
-/* Right main */
-
-@media screen and (min-width:992px) {
-
-    .ms_main {
-        padding-top: 4rem;
-    }
-
-    .admin_main {
-        padding-top: 4rem;
+    header.hidden {
+        top: 0 !important;
     }
 }
+
+
+
 
 /* Main canvas */
 

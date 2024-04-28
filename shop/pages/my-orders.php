@@ -7,7 +7,7 @@ $myOrders = $ordersMgr->getUserOrders($logUser->id);
 
 <div class="row row-cols-md-3 mt-5">
     <?php foreach ($myOrders as $index => $order) { ?>
-        <div class="col">
+        <div class="col g-3">
             <div class="card h-100 shadow">
                 <div class="card-header fw-bolder text-center">Ordine N. <?= $index + 1 ?></div>
                 <div class="card-body d-flex flex-column">

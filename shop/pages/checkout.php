@@ -15,38 +15,60 @@ if (isset($_SESSION['users'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cartID = $cm->getCartID();
-    $query = $cm->getCartTotal($cartID);
-    $cart_total = $query['total'];
-    if(isset($_SESSION['users'])) {
-        $orderMgr->create((object)[
-            'name' => $_POST['name'],
-            'address' => $_POST['address'],
-            'phone' => $_POST['phone'],
-            'total_amount' => $cart_total,
-            'cart_id' => $cartID,
-            'user_id' => $userID
-        ]);
+    // Assicurati che tutti i campi obbligatori siano stati forniti
+    $required_fields = ['name', 'address', 'phone'];
+    $missing_fields = [];
+    $errorMsg = '';
+    foreach ($required_fields as $field) {
+        if (!isset($_POST[$field]) || empty($_POST[$field])) {
+            $missing_fields[] = $field;
+        }
+    }
+
+    // Se ci sono campi mancanti, gestisci l'errore
+    if (!empty($missing_fields)) {
+        // Gestisci l'errore, ad esempio restituendo un messaggio all'utente
+        $errorMsg = "I seguenti campi sono obbligatori: " . implode(', ', $missing_fields);
     } else {
-        $orderMgr->create((object)[
+        // Se tutti i campi obbligatori sono stati forniti, procedi con la creazione dell'ordine
+
+        // Ottieni l'ID del carrello
+        $cartID = $cm->getCartID();
+        $query = $cm->getCartTotal($cartID);
+        $cart_total = $query['total'];
+
+        // Creazione dell'ordine
+        $order_data = [
             'name' => $_POST['name'],
             'address' => $_POST['address'],
             'phone' => $_POST['phone'],
             'total_amount' => $cart_total,
-            'cart_id' => $cartID,
-        ]);
+            'note' => isset($_POST['note']) ? $_POST['note'] : '',
+            'cart_id' => $cartID
+        ];
+
+        // Se l'utente è loggato, aggiungi anche l'ID dell'utente
+        if (isset($_SESSION['users'])) {
+            $order_data['user_id'] = $userID;
+        }
+
+        // Creazione dell'ordine
+        $orderMgr->create((object)$order_data);
+
+        // Se l'utente è loggato e i dettagli non esistono, crea i dettagli dell'utente
+        if (isset($_SESSION['users']) && $details == null) {
+            $detailsMgr->create((object)[
+                'name' => $_POST['name'],
+                'address' => $_POST['address'],
+                'phone' => $_POST['phone'],
+                'user_id' => $userID
+            ]);
+        }
+
+        $cm->startNewClientSession();
+        header("Location: ../public/?page=homepage&message=Acquisto effettuato con successo");
+        exit;
     }
-    if (isset($_SESSION['users']) && $details == null) {
-        $detailsMgr->create((object)[
-            'name' => $_POST['name'],
-            'address' => $_POST['address'],
-            'phone' => $_POST['phone'],
-            'user_id' => $userID
-        ]);
-    }
-    $cm->startNewClientSession();
-    header("Location: ../public/?page=homepage&message=Acquisto effettuato con successo");
-    exit;
 }
 ?>
 
@@ -72,6 +94,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="phone" class="form-label">Telefono</label>
                 <input name="phone" value="<?= isset($details['phone']) ? htmlspecialchars($details['phone']) : '' ?>" required type="tel" class="form-control" id="phone">
             </div>
+
+            <div class="mb-3">
+                <label for="note" class="form-label">Note</label>
+                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+            </div>
+
+            <?php if (isset($errorMsg) && $errorMsg != '') { ?>
+                <div class="alert alert-danger my-2">
+                    <?= $errorMsg ?>
+                </div>
+            <?php } ?>
 
             <button <?= isset($_SESSION['users']) && $details == null ? 'disabled' : '' ?> id="buyButton" type="submit" class="btn btn-primary">Compra</button>
         </form>

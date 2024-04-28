@@ -25,6 +25,7 @@ if (!(property_exists($order, 'id'))) {
             <p class="card-text"><strong>Nome Cliente:</strong> <?= $order->name ?></p>
             <p class="card-text"><strong>Indirizzo:</strong> <?= $order->address ?></p>
             <p class="card-text"><strong>Telefono:</strong> <?= $order->phone ?></p>
+            <p class="card-text"><strong>Note:</strong> <?= $order->note ?></p>
             <hr>
             <h5 class="card-title mb-3 text-center">Dettagli Ordine</h5>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">

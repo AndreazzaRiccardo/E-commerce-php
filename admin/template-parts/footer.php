@@ -11,7 +11,7 @@ $cart_total = $cm->getCartTotal($cartID);
 <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
 
-<script src="<?= ROOT_URL ?>/assets/js/main.js"></script>
+<script src="<?= ROOT_URL ?>/assets/js/headerMobile.js"></script>
 </body>
 
 </html>

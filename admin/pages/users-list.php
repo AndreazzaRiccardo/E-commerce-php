@@ -3,6 +3,14 @@
 $usersMgr = new UserManager();
 $users = $usersMgr->getAll(10, 1);
 
+if (isset($_POST['delete'])) {
+  $userID = htmlspecialchars(trim($_POST['id']));
+  $usersMgr->delete($userID);
+
+  header("Location: ?page=users-list");
+  exit();
+}
+
 ?>
 
 <div class="p-2">
@@ -28,8 +36,13 @@ $users = $usersMgr->getAll(10, 1);
                   echo 'Regular';
                 } ?>
             </td>
-            <td class="d-flex justify-content-center">
+            <td class="d-flex justify-content-center gap-2">
               <a class="btn btn-sm btn-outline-primary rounded" href="?page=profile&id=<?= $user->id ?>">Dettagli</a>
+              <form method="POST">
+                <input type="hidden" name="id" value="<?= $user->id ?>">
+                <input type="hidden" name="delete">
+                <button class="btn btn-sm btn-outline-danger rounded fs-4" type="submit"><i class="fa-solid fa-trash"></i></button>
+              </form>
             </td>
           </tr>
         <?php  } ?>

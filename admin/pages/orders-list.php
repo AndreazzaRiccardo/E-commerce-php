@@ -3,6 +3,14 @@
 $ordersMgr = new OrderManager();
 $orders = $ordersMgr->getAll(10, 1);
 
+if (isset($_POST['delete'])) {
+  $orderID = htmlspecialchars(trim($_POST['id']));
+  $ordersMgr->delete($orderID);
+
+  header("Location: ?page=orders-list");
+  exit();
+}
+
 ?>
 
 <div class="p-2">
@@ -23,8 +31,13 @@ $orders = $ordersMgr->getAll(10, 1);
             <th><?= $order->name ?></th>
             <td><?= $order->id ?></td>
             <td><?= $order->total_amount ?> €</td>
-            <td class="d-flex justify-content-center">
+            <td class="d-flex justify-content-center gap-2">
               <a class="btn btn-sm btn-outline-primary rounded" href="?page=order&id=<?= $order->id ?>">Dettagli</a>
+              <form method="POST">
+                <input type="hidden" name="id" value="<?= $order->id ?>">
+                <input type="hidden" name="delete">
+                <button class="btn btn-sm btn-outline-danger rounded fs-4" type="submit"><i class="fa-solid fa-trash"></i></button>
+              </form>
             </td>
           </tr>
         <?php  } ?>

@@ -15,10 +15,10 @@
 
 <body>
 <div id="backgroundContainer"></div>
-    <header class="p-2 bg-primary text-white shadow position-fixed top-0 left-0 w-100">
+    <header class="p-2 bg-primary text-white shadow position-sticky top-0 left-0 w-100">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                <a href="#" class="d-flex align-items-center me-5 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
+                <a href="#" class="d-flex align-items-center me-md-4 mb-2 mb-lg-0 text-warning fw-bolder fs-4 text-decoration-none">
                     ShoPHPify
                 </a>
                 <div class="d-flex flex-column flex-sm-row justify-content-center">

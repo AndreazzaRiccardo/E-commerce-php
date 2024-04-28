@@ -11,7 +11,7 @@ if (isset($_POST['register'])) {
     $password = htmlspecialchars(trim($_POST['password']));
     $confirmPassword = htmlspecialchars(trim($_POST['confirm_password']));
 
-    if ($email != '' && $password != '') {
+    if ($email != '' && $password != '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $userMgr = new UserManager();
         if ($userMgr->passwordMatch($password, $confirmPassword)) {
             $result = $userMgr->register($email, $password);
@@ -25,7 +25,7 @@ if (isset($_POST['register'])) {
             $errorMsg = "Le password non corrispondono";
         }
     } else {
-        $errorMsg = "Devi compilare tutti i campi";
+        $errorMsg = "Devi compilare correttamente tutti i campi";
     }
 }
 ?>

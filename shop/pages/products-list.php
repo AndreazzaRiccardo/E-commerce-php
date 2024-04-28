@@ -34,7 +34,7 @@ if (isset($_GET['search'])) {
 
 $disabledPrev = '';
 $disabledNext = '';
-if(isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])){
+if (isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])) {
     $disabledPrev = 'disabled';
 } elseif (count($products) < 9) {
     $disabledNext = 'disabled';
@@ -49,11 +49,11 @@ if(isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])){
                 <h2>I nostri prodotti</h2>
                 <form id="paginationForm" method="GET">
                     <input type="hidden" id="page" name="n_page" min="1" value="<?php echo $currentPage; ?>">
-                    <button <?= $disabledPrev ?> type="button" id="prevPage" class="btn btn-sm btn-dark mr-2"><<</button>
-                    <button <?= $disabledNext ?> type="button" id="nextPage" class="btn btn-sm btn-dark">>></button>
+                    <button <?= $disabledPrev ?> type="button" id="prevPage" class="btn btn-sm btn-dark mr-2">
+                        <<</button>
+                            <button <?= $disabledNext ?> type="button" id="nextPage" class="btn btn-sm btn-dark">>></button>
                 </form>
             </div>
-
         <?php } ?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xll-4 mt-4">
             <?php if ($products) { ?>
