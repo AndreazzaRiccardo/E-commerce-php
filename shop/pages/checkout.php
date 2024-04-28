@@ -7,7 +7,7 @@ $userMgr = new UserManager();
 $orderMgr = new OrderManager();
 $cm = new CartManager();
 
-if (isset($_SESSION['users'])) {
+if (isset($_SESSION['users']) && !empty($_SESSION['users'])) {
     $userID = $_SESSION['users']->id;
     $user = $userMgr->get($userID);
     $detailsMgr = new UserDetailsManager();
@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Gestisci l'errore, ad esempio restituendo un messaggio all'utente
         $errorMsg = "I seguenti campi sono obbligatori: " . implode(', ', $missing_fields);
     } else {
-        // Se tutti i campi obbligatori sono stati forniti, procedi con la creazione dell'ordine
 
         // Ottieni l'ID del carrello
         $cartID = $cm->getCartID();
@@ -48,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
 
         // Se l'utente è loggato, aggiungi anche l'ID dell'utente
-        if (isset($_SESSION['users'])) {
+        if (isset($_SESSION['users']) && !empty($_SESSION['users'])) {
+            $userID = $_SESSION['users']->id;
             $order_data['user_id'] = $userID;
         }
 
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $orderMgr->create((object)$order_data);
 
         // Se l'utente è loggato e i dettagli non esistono, crea i dettagli dell'utente
-        if (isset($_SESSION['users']) && $details == null) {
+        if (isset($_SESSION['users']) && !empty($_SESSION['users']) && $details == null) {
             $detailsMgr->create((object)[
                 'name' => $_POST['name'],
                 'address' => $_POST['address'],
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $cm->startNewClientSession();
         header("Location: ../public/?page=homepage&message=Acquisto effettuato con successo");
-        exit;
+        exit();
     }
 }
 ?>
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input name="email" required type="email" class="form-control" value="<?= isset($user->email) ? $user->email : '' ?>" id="email" aria-describedby="emailHelp">
+                <input name="email" type="email" class="form-control" value="<?= isset($user->email) ? $user->email : '' ?>" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
@@ -115,5 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
     </div>
 </div>
-
-<script src="<?= ROOT_URL ?>/assets/js/termCheckbox.js"></script>
+<?php if (isset($_SESSION['users']) && $details == null) { ?>
+    <script src="<?= ROOT_URL ?>/assets/js/termCheckbox.js"></script>
+<?php } ?>

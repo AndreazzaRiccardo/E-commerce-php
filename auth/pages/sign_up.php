@@ -3,6 +3,7 @@ $errorMsg = '';
 
 if (isset($_SESSION['users'])) {
     header('Location: ../public');
+    exit();
 }
 
 if (isset($_POST['register'])) {
@@ -18,6 +19,7 @@ if (isset($_POST['register'])) {
 
             if ($result) {
                 header('Location: ?page=login');
+                exit();
             } else {
                 $errorMsg = 'Registrazione Fallita, La mail potrebbe già esistere';
             }

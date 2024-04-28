@@ -8,7 +8,7 @@ if (!defined('ROOT_URL')) {
 
 if (!isset($_GET['id'])) {
     header('Location: ../public');
-    exit;
+    exit();
 }
 
 
@@ -32,7 +32,7 @@ $product = $my_product->get($id);
 
 if (!(property_exists($product, 'id'))) {
     header('Location: ../public');
-    exit;
+    exit();
 }
 ?>
 

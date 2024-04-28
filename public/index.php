@@ -7,6 +7,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 if (isset($_SESSION['users'])) {
     if ($_SESSION['users']->is_admin) {
         header('Location: ../admin');
+        exit();
     }
 }
 

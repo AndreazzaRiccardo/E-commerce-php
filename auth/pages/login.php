@@ -1,11 +1,11 @@
 <?php
-$errorMsg = '';
-
-if (isset($_SESSION['users'])) {
+if (isset($_SESSION['users']) && !empty($_SESSION['users'])) {
     if ($_SESSION['users']->is_admin) {
         header('Location: ../admin');
+        exit();
     } else {
         header('Location: ../public');
+        exit();
     }
 }
 
@@ -18,10 +18,12 @@ if (isset($_POST['login'])) {
     $result = $userMgr->login($email, $password);
 
     if ($result) {
-        if (!$_SESSION['users']->is_admin) {
+        if (isset($_SESSION['users']) && !$_SESSION['users']->is_admin) {
             header('Location: ../public');
+            exit();
         } else {
             header('Location: ../admin');
+            exit();
         }
     } else {
         $errorMsg = 'Mail o password errati';
@@ -41,7 +43,7 @@ if (isset($_POST['login'])) {
     </div>
 
     <div style="min-height: 70px;">
-        <?php if ($errorMsg != '') { ?>
+        <?php if (isset($errorMsg)) { ?>
             <div class="alert alert-danger m-0">
                 <?= $errorMsg ?>
             </div>

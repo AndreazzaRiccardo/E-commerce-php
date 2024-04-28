@@ -12,12 +12,13 @@ $details = $detailsMgr->getDetails($id);
 
 if (!(property_exists($user, 'id'))) {
   header('Location: ../admin');
-  exit;
+  exit();
 }
 
 if (isset($_POST['id'])) {
   $my_user->changeType($_POST['id']);
   header('Location: ../admin/?page=users-list');
+  exit();
 }
 ?>
 

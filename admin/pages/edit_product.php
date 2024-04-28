@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Chiamata alla funzione update del ProductManager
     $productMgr->update($_POST, $id);
     header('Location: ?page=products-list');
+    exit();
 }
 
 ?>

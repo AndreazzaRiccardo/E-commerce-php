@@ -1,7 +1,7 @@
 <?php
 if (!isset($_GET['id'])) {
     header('Location: ../admin');
-    exit;
+    exit();
 }
 
 $id = htmlspecialchars(trim($_GET['id']));
@@ -12,7 +12,7 @@ $orderDetails = $my_order->getOrderDetails($order->cart_id);
 
 if (!(property_exists($order, 'id'))) {
     header('Location: ../admin');
-    exit;
+    exit();
 }
 
 ?>
