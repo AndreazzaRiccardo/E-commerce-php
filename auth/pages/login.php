@@ -10,7 +10,6 @@ if (isset($_SESSION['users']) && !empty($_SESSION['users'])) {
 }
 
 if (isset($_POST['login'])) {
-    $message = '';
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
 
@@ -18,11 +17,11 @@ if (isset($_POST['login'])) {
     $result = $userMgr->login($email, $password);
 
     if ($result) {
-        if (isset($_SESSION['users']) && !$_SESSION['users']->is_admin) {
-            header('Location: ../public');
+        if ($_SESSION['users']->is_admin) {
+            header('Location: ../admin');
             exit();
         } else {
-            header('Location: ../admin');
+            header('Location: ../public');
             exit();
         }
     } else {

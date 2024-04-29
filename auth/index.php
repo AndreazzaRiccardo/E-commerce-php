@@ -1,5 +1,4 @@
 <?php
-
 $page = isset($_GET["page"]) ? $_GET["page"] : 'login';
 ?>
 
@@ -12,8 +11,6 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 'login';
         <div class="col-12 col-sm-10 col-xl-6">
         <?php include __DIR__ . "/pages/" . $page . '.php' ?>
         </div>
-        
-
     </div>
 </main>
 

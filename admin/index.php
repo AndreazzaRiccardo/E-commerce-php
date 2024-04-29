@@ -1,5 +1,3 @@
-<?php include "../inc/config.php" ?>
-
 <?php
 if (!$_SESSION['users']->is_admin) {
     die;
@@ -15,6 +13,8 @@ if(isset($_GET["page"])) {
 }
 
 ?>
+
+<?php include "../inc/config.php" ?>
 
 
 <?php include __DIR__ . "/../admin/template-parts/header.php" ?>

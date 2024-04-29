@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<div id="backgroundContainer"></div>
+    <div id="backgroundContainer"></div>
     <header class="p-2 bg-primary text-white shadow position-sticky top-0 left-0 w-100">
         <nav class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">

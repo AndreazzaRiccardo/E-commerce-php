@@ -1,5 +1,3 @@
-<?php include "../inc/config.php"; ?>
-
 <?php
 
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
@@ -10,8 +8,9 @@ if (isset($_SESSION['users'])) {
         exit();
     }
 }
-
 ?>
+
+<?php include "../inc/config.php"; ?>
 
 <?php include __DIR__ . "/../public/template-parts/header.php" ?>
 
