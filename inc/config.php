@@ -1,6 +1,8 @@
 <?php
 // phpinfo(); die;
 // error_reporting(E_ALL ^ E_WARNING);
+error_reporting(0);
+
 
 session_start();
 

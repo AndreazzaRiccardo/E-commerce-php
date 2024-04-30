@@ -1,6 +1,7 @@
 <?php
 if (!isset($_GET['id'])) {
-    header('Location: ../admin');
+    // header('Location: ../admin');
+    echo "<script>window.location.href = '../admin';</script>";
     exit();
 }
 
@@ -11,7 +12,8 @@ $order = $my_order->get($id);
 $orderDetails = $my_order->getOrderDetails($order->cart_id);
 
 if (!(property_exists($order, 'id'))) {
-    header('Location: ../admin');
+    // header('Location: ../admin');
+    echo "<script>window.location.href = '../admin';</script>";
     exit();
 }
 

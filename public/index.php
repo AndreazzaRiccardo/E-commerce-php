@@ -1,16 +1,16 @@
-<?php
+<?php include "../inc/config.php"; ?>
 
+<?php
 $page = isset($_GET["page"]) ? $_GET["page"] : 'homepage';
 
 if (isset($_SESSION['users'])) {
     if ($_SESSION['users']->is_admin) {
-        header('Location: ../admin');
+        // header('Location: ../admin');
+        echo "<script>window.location.href = '../admin';</script>";
         exit();
     }
 }
 ?>
-
-<?php include "../inc/config.php"; ?>
 
 <?php include __DIR__ . "/../public/template-parts/header.php" ?>
 

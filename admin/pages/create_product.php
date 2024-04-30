@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Chiamata alla funzione create del ProductManager
     $productMgr->create($_POST);
-    header('Location: ?page=products-list');
+    // header('Location: ?page=products-list');
+    echo "<script>window.location.href = '?page=products-list';</script>";
     exit();
 }
 

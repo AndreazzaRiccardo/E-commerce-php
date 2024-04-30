@@ -7,7 +7,8 @@ if (isset($_POST['delete'])) {
   $userID = htmlspecialchars(trim($_POST['id']));
   $usersMgr->delete($userID);
 
-  header("Location: ?page=users-list");
+  // header("Location: ?page=users-list");
+  echo "<script>window.location.href = '?page=users-list';</script>";
   exit();
 }
 

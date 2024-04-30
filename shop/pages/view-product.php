@@ -7,7 +7,8 @@ if (!defined('ROOT_URL')) {
 }
 
 if (!isset($_GET['id'])) {
-    header('Location: ../public');
+    // header('Location: ../public');
+    echo "<script>window.location.href = '../public';</script>";
     exit();
 }
 
@@ -28,10 +29,11 @@ if (isset($_POST['add_to_cart'])) {
 
 $id = htmlspecialchars(trim($_GET['id']));
 $my_product = new ProductManager();
-$product = $my_product->get($id);
+$product = $my_product->getOneWithCategory($id);
 
 if (!(property_exists($product, 'id'))) {
-    header('Location: ../public');
+    // header('Location: ../public');
+    echo "<script>window.location.href = '../public';</script>";
     exit();
 }
 ?>
@@ -49,7 +51,11 @@ if (!(property_exists($product, 'id'))) {
                 <div class="col-md-8">
                     <div class="card-body d-flex flex-column justify-content-between h-100 gap-5">
                         <div>
-                            <h2 class="card-title"><?= $product->name ?></h2>
+                            <div class="d-flex gap-4 align-items-start">
+                                <h2 class="card-title"><?= $product->name ?></h2>
+                                <span class="badge text-bg-info rounded-pill"><?= $product->category_name ?></span>
+                            </div>
+                            
                             <p class="fw-bolder">Prezzo: <?= $product->price ?> €</p>
                             <hr>
                             <p class="card-text"><?= $product->description ?></p>

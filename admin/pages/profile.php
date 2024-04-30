@@ -1,6 +1,7 @@
 <?php
 if (!isset($_GET['id'])) {
-  header('Location: ../admin');
+  // header('Location: ../admin');
+  echo "<script>window.location.href = '../admin';</script>";
   exit;
 }
 
@@ -11,13 +12,15 @@ $detailsMgr = new UserDetailsManager();
 $details = $detailsMgr->getDetails($id);
 
 if (!(property_exists($user, 'id'))) {
-  header('Location: ../admin');
+  // header('Location: ../admin');
+  echo "<script>window.location.href = '../admin';</script>";
   exit();
 }
 
 if (isset($_POST['id'])) {
   $my_user->changeType($_POST['id']);
-  header('Location: ../admin/?page=users-list');
+  // header('Location: ../admin/?page=users-list');
+  echo "<script>window.location.href = '../admin/?page=users-list';</script>";
   exit();
 }
 ?>

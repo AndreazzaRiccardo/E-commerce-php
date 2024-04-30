@@ -1,6 +1,6 @@
 <?php
 $productMgr = new ProductManager();
-$products = $productMgr->getWithCategory();
+$products = $productMgr->getAllWithCategory();
 
 ?>
 

@@ -66,7 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $cm->startNewClientSession();
-        header("Location: ../public/?page=homepage&message=Acquisto effettuato con successo");
+        // header("Location: ../public/?page=homepage&message=Acquisto effettuato con successo");
+        echo "<script>window.location.href = '../public/?page=homepage&message=Acquisto+effettuato+con+successo';</script>";
         exit();
     }
 }

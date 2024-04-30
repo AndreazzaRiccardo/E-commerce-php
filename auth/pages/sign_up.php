@@ -2,7 +2,8 @@
 $errorMsg = '';
 
 if (isset($_SESSION['users'])) {
-    header('Location: ../public');
+    // header('Location: ../public');
+    echo "<script>window.location.href = '../public';</script>";
     exit();
 }
 
@@ -18,7 +19,8 @@ if (isset($_POST['register'])) {
             $result = $userMgr->register($email, $password);
 
             if ($result) {
-                header('Location: ?page=login');
+                // header('Location: ?page=login');
+                echo "<script>window.location.href = '?page=login';</script>";
                 exit();
             } else {
                 $errorMsg = 'Registrazione Fallita, La mail potrebbe già esistere';

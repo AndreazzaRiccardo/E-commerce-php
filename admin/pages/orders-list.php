@@ -7,7 +7,8 @@ if (isset($_POST['delete'])) {
   $orderID = htmlspecialchars(trim($_POST['id']));
   $ordersMgr->delete($orderID);
 
-  header("Location: ?page=orders-list");
+  // header("Location: ?page=orders-list");
+  echo "<script>window.location.href = '?page=orders-list';</script>";
   exit();
 }
 

@@ -1,10 +1,12 @@
 <?php
 if (isset($_SESSION['users']) && !empty($_SESSION['users'])) {
     if ($_SESSION['users']->is_admin) {
-        header('Location: ../admin');
+        echo "<script>window.location.href = '../admin';</script>";
+        // header('Location: ../admin');
         exit();
     } else {
-        header('Location: ../public');
+        echo "<script>window.location.href = '../public';</script>";
+        // header('Location: ../public');
         exit();
     }
 }
@@ -18,10 +20,12 @@ if (isset($_POST['login'])) {
 
     if ($result) {
         if ($_SESSION['users']->is_admin) {
-            header('Location: ../admin');
+            echo "<script>window.location.href = '../admin';</script>";
+            // header('Location: ../admin');
             exit();
         } else {
-            header('Location: ../public');
+            echo "<script>window.location.href = '../public';</script>";
+            // header('Location: ../public');
             exit();
         }
     } else {
