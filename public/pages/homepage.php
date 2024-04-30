@@ -13,7 +13,7 @@
 
 <a class="btn btn-primary mt-3" href="<?= ROOT_URL ?>shop/?page=products-list">Vai allo Shopping &raquo;</a>
 
-<div class="video-container mt-5">
+<div class="ms_video-container mt-5">
     <video controls>
         <source src="<?= ROOT_URL . 'public/video/presentation.mp4' ?>" type="video/mp4">
         Il tuo browser non supporta la riproduzione di video.
