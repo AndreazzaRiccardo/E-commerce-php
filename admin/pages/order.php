@@ -39,6 +39,8 @@ if (!(property_exists($order, 'id'))) {
             </div>
             <h5 class="card-title mb-3 text-center mt-5">TOTALE</h5>
             <p class="card-text text-center"><?= $order->total_amount ?> €</p>
+            <hr>
+            <p class="text-end"><?= $order->created_at ?></p>
         </div>
     </div>
 </div>
