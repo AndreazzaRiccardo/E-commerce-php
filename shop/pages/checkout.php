@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'phone' => $_POST['phone'],
             'total_amount' => $cart_total,
             'note' => isset($_POST['note']) ? $_POST['note'] : '',
-            'cart_id' => $cartID
+            'cart_id' => $cartID,
+            'created_at' => date('Y-m-d H:i:s')
         ];
 
         // Se l'utente è loggato, aggiungi anche l'ID dell'utente

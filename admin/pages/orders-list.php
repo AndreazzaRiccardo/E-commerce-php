@@ -1,7 +1,7 @@
 <?php
 
 $ordersMgr = new OrderManager();
-$orders = $ordersMgr->getAll(10, 1);
+$orders = $ordersMgr->getAll();
 
 if (isset($_POST['delete'])) {
   $orderID = htmlspecialchars(trim($_POST['id']));
@@ -16,7 +16,7 @@ if (isset($_POST['delete'])) {
 
 <div class="p-2">
   <h1>Ordini</h1>
-  <div class="table-responsive">
+  <div class="table-responsive" style="max-height: 67vh;">
     <table class="table table-hover">
       <thead>
         <tr>

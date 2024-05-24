@@ -6,6 +6,8 @@ if (!defined('ROOT_URL')) {
 $productMgr = new ProductManager();
 $currentPage = isset($_GET['n_page']) ? intval($_GET['n_page']) : 1;
 
+
+
 if (isset($_POST['delete'])) {
     $productID = htmlspecialchars(trim($_POST['id']));
     $productMgr->delete($productID);
@@ -73,16 +75,16 @@ if(isset($_GET['n_page']) && $_GET['n_page'] == 1 || !isset($_GET['n_page'])){
                                 <hr>
                                 <div class="d-flex justify-content-between gap-2">
                                     <a title="Modifica" href="?page=edit_product&id=<?= $product->id ?>" class="ms_btn_yellow btn text-dark fs-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <button title="Elimina" type="button" class="ms_btn_red btn text-dark fs-2" data-bs-toggle="modal" data-bs-target="#modal-delete"><i class="fa-solid fa-trash-arrow-up"></i></button>
+                                    <button title="Elimina" type="button" class="ms_btn_red btn text-dark fs-2" data-bs-toggle="modal" data-bs-target="#modal-delete-<?= $product->id ?>"><i class="fa-solid fa-trash-arrow-up"></i></button>
                                 </div>
-
+                                
                             </div>
                         </div>
                     </div>
+                    <?php require __DIR__ . "/../template-parts/modal.php" ?>
                 <?php } ?>
             <?php } else { ?>
                 <h2>Nessun Prodotto Disponibile</h2>
             <?php } ?>
         </div>
-        <?php require_once __DIR__ . "/../template-parts/modal.php" ?>
         <script src="<?= ROOT_URL ?>/assets/js/pagination.js"></script>

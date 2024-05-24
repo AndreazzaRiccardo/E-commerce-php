@@ -1,7 +1,7 @@
 <?php
 
 $usersMgr = new UserManager();
-$users = $usersMgr->getAll(10, 1);
+$users = $usersMgr->getAll();
 
 if (isset($_POST['delete'])) {
   $userID = htmlspecialchars(trim($_POST['id']));
@@ -16,7 +16,7 @@ if (isset($_POST['delete'])) {
 
 <div class="p-2">
   <h1>Utenti</h1>
-  <div class="table-responsive">
+  <div class="table-responsive" style="max-height: 67vh;">
     <table class="table table-hover">
       <thead>
         <tr>

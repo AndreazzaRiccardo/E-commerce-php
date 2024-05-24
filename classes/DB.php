@@ -157,7 +157,7 @@ class DBManager
 
     public function update($obj, $id)
     {
-        $rowsDeleted = $this->db->update_one($this->tableName, (int)$id, (array)$obj);
-        return (int) $rowsDeleted;
+        $rowsUpdated = $this->db->update_one($this->tableName, (int)$id, (array)$obj);
+        return (int) $rowsUpdated;
     }
 }
