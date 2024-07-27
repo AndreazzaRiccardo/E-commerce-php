@@ -6,7 +6,7 @@ error_reporting(0);
 
 session_start();
 
-define('ROOT_URL', "http://" . $_SERVER['HTTP_HOST'] . "/E-commerce-php/");
+define('ROOT_URL', "http://" . $_SERVER['HTTP_HOST'] . "/e-commerce-php/");
 
 // Env DB
 define('DB_HOST', "localhost");

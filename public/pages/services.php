@@ -10,6 +10,7 @@
             <li class="list-group-item list-group-item-action">
                 <h4>Backend Development</h4>
                 <p>Sono esperto nello sviluppo di applicazioni server-side utilizzando <strong>PHP e Laravel</strong>. Posso creare API robuste e scalabili, gestire l'autenticazione degli utenti, manipolare e gestire dati nel <strong>database MySQL, MariaDB</strong> e molto altro ancora.</p>
+                <p>Inoltre successivamente al corso Boolean son stato selezionato da Manpower per ricevere un'ulteriore formazione su Java, apprendendo quindi anche le basi di questo linguaggio</p>
             </li>
             <li class="list-group-item list-group-item-action">
                 <h4>Database Management</h4>
